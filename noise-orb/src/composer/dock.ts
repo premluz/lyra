@@ -28,6 +28,7 @@ export class WaveDock {
 
   constructor(private score: Score, private audition: (step: number, preview?: boolean) => void, randomise?: () => void) {
     this.settingsToggle();
+    this.focusToggle();
     this.lanes = new LaneList(score); this.controls = new LaneControls(score, () => this.audition(this.selectedStep));
     this.rhythm = new RhythmControls(score, () => this.audition(this.selectedStep, false));
     this.composition = new CompositionControls(score, () => this.audition(this.selectedStep, false));
@@ -54,6 +55,19 @@ export class WaveDock {
     };
     button.addEventListener('click', () => { controls.hidden = !controls.hidden; update(); });
     header.prepend(button); update();
+  }
+  private focusToggle() {
+    const experience = document.querySelector('.experience'), root = element('instrument', HTMLElement);
+    if (!(experience instanceof HTMLElement)) throw new Error('Focus mode needs the instrument viewport.');
+    const button = document.createElement('button');
+    button.type = 'button'; button.className = 'focus-settings-toggle'; button.setAttribute('aria-controls', 'composer');
+    const update = () => {
+      const expanded = root.dataset.focusMode !== 'true';
+      button.textContent = expanded ? 'Hide settings' : 'Show settings';
+      button.setAttribute('aria-expanded', String(expanded));
+    };
+    button.addEventListener('click', () => { root.dataset.focusMode = String(root.dataset.focusMode !== 'true'); update(); });
+    experience.append(button); update();
   }
   update() {
     const lane = this.score.selected, label = lane.name;
