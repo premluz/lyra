@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="A small world of sound and light. Generate a piece, move gently, and let it unfold." />
+    <title>Aura — Sound, without edges</title>
+  </head>
+  <body>
+    <main class="instrument aura-mode" id="instrument">
+      <section class="aura-stage" id="aura-stage" aria-label="A world of sound and light">
+        <div class="aura-haze" aria-hidden="true"></div>
+        <div class="mesh" id="mesh" tabindex="-1"><img class="fallback" src="./fallback.svg" alt="A quiet field of glowing particles" /></div>
+        <div id="aura-play" tabindex="0" role="application" aria-label="Generate a piece to begin. Move to explore the sound. Press briefly for a note, hold to gather light, hold longer to open a harmony, and stay for a bloom. Arrow keys move; hold Space or Enter; Escape releases."></div>
+        <svg id="aura-cursor" aria-hidden="true"><circle id="aura-hold" /></svg>
+        <div class="aura-intro"><p>SOUND, WITHOUT EDGES</p><h1>Let it unfold.</h1></div>
+        <div class="exit-overlay aura-exit" id="exit-overlay" hidden><p class="aura-eyebrow">BACK TO QUIET</p><h2>A little space.</h2><button id="return" class="aura-generate" type="button" aria-label="Return to Aura">Return <span aria-hidden="true">↗</span></button></div>
+      </section>
+      <header class="aura-header"><a class="aura-brand" href="./sculpt.html" aria-label="Back to music demos">AURA<span>Sound, taking shape.</span></a><output id="aura-title" aria-live="polite"></output><div class="aura-utilities"><button id="sound" class="aura-icon" type="button" aria-label="Start sound" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path class="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg><span id="sound-label" hidden>Sound on</span></button><button id="exit" class="aura-icon" type="button" aria-label="Leave Aura"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"/></svg></button></div></header>
+      <footer class="aura-footer"><output id="aura-caption">Move to wander. Hold to unfold.</output><button class="aura-generate" id="aura-generate" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2c0 5-3 8-8 8 5 0 8 3 8 8 0-5 3-8 8-8-5 0-8-3-8-8Z"/></svg><span id="aura-generate-label">Generate</span></button><p>Every beginning is different.</p></footer>
+      <span id="sound-hint" hidden>Your first touch starts the music</span>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </main>
+    <script type="module" src="/src/aura/main.ts"></script>
+  </body>
+</html>

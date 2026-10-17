@@ -1,0 +1,13 @@
+.dialog-overlay { position: fixed; inset: 0; background: var(--overlay); backdrop-filter: blur(5px); z-index: 50; }
+.export-dialog { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(600px, 90vw); max-height: 90vh; overflow-y: auto; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--panel); padding: var(--space-6); box-shadow: 0 20px 90px var(--shadow); z-index: 51; }
+.dialog-header { display: flex; justify-content: space-between; align-items: center; }
+.dialog-icon { display: grid; place-items: center; width: 40px; height: 40px; background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent-border); border-radius: var(--radius-lg); }
+.export-dialog h2 { font-size: 24px; font-weight: 500; letter-spacing: -.6px; margin: var(--space-5) 0 var(--space-2); }
+.export-dialog > p { color: var(--muted); line-height: 1.7; font-size: var(--body-text); }
+.export-spec { display: flex; gap: var(--space-2); margin: var(--space-5) 0; }
+.export-spec span { padding: 5px var(--space-2); border: 1px solid var(--line); border-radius: var(--radius); color: var(--muted); font: 9px var(--mono); }
+.code-heading { display: flex; align-items: center; justify-content: space-between; font: 9px var(--mono); color: var(--dim); margin-bottom: var(--space-2); }
+.code-block { margin: 0; padding: var(--space-4); background: var(--panel-deep); border: 1px solid var(--line); border-radius: var(--radius); color: var(--accent); overflow: auto; line-height: 1.7; max-height: 280px; }
+.code-block code { font-size: var(--small-text); }
+.export-dialog .export-note { font-size: var(--small-text); margin: var(--space-4) 0 var(--space-5); }
+.dialog-actions { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); padding-top: var(--space-4); }

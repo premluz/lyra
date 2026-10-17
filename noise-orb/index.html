@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#101311" />
+    <meta name="description" content="An instrument made of particles. Move, touch, and let it unfold." />
+    <title>Noise Orb — a small instrument</title>
+  </head>
+  <body>
+    <main class="instrument" id="instrument">
+      <header class="masthead"><a class="wordmark" href="./" aria-label="Noise Orb home"><span class="brand-mark">◌</span> FORM / FREQUENCY</a><span class="edition">EXPERIMENT 001</span><button id="exit" class="quiet-button" type="button">Exit <span aria-hidden="true">↗</span></button></header>
+      <section class="experience" aria-label="Noise Orb instrument">
+        <div class="intro"><p class="eyebrow">A SMALL INSTRUMENT</p><h1>Noise<br><em>Orb.</em></h1><p class="description">A little movement.<br>A little music.<br>Nothing to get right.</p></div>
+        <div class="mesh" id="mesh" role="application" aria-label="Particle instrument. Move to stir, click to pluck, hold and drag to deepen. Keyboard: arrows choose a point, Space plucks, Shift plus arrows swells." tabindex="0"><img class="fallback" src="./fallback.svg" alt="A softly glowing orb of particles" /><span class="touch-cue" aria-hidden="true">TOUCH TO BEGIN</span></div>
+        <aside class="field-label" aria-hidden="true"><span class="live-dot"></span><span>NOISE FIELD<br><span class="muted">D MAJOR PENTATONIC</span></span></aside>
+        <div class="exit-overlay" id="exit-overlay" hidden><p class="eyebrow">TAKE A BREATH</p><h2>Until next time.</h2><button id="return" class="sound-button" type="button">Return to the orb <span aria-hidden="true">↗</span></button></div>
+      </section>
+      <footer class="footer"><div class="gestures"><span><b>01</b> Move to stir</span><span><b>02</b> Tap to pluck</span><span><b>03</b> Hold to deepen</span></div><div class="sound-control"><span class="sound-hint" id="sound-hint">Your first touch starts the music</span><button class="sound-button" id="sound" type="button" aria-label="Start sound"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path class="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg><span id="sound-label">Sound on</span></button></div></footer>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

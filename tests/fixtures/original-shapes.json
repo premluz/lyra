@@ -1,0 +1,118 @@
+{
+  "sphere:1000": {
+    "positions": "298fa6e6ce78a34b2efe597f051c210c8dcfebc0f5745b1975b4e63cc3447d78"
+  },
+  "sphere:1733": {
+    "positions": "40b6acb788441e63a7629077d971f5bd79d5f53cc3b2fcb3b6c6bde44eb89b75"
+  },
+  "lab:1000": {
+    "positions": "2a85302f41151ade114592cbd485b7e6aafcb89c882911266a0b4aabb31793f0"
+  },
+  "lab:1733": {
+    "positions": "e56486821656d0e2cae0fac66a5f964e49521634302ea6f215f76266a3b4d0ef"
+  },
+  "helix:1000": {
+    "positions": "038905c893feda993fc438cda481b32f1b2c5cbbfe8eb5a4dd018e4f4011c6a4",
+    "phis": "db91fbc5fa16955e5e37f9b29907e98c28e6a26c927a1b5ec098f7fd647ee750",
+    "sizes": "d3c6ce0edb032e528f43089be5c001c2dd29e6655741ec47739d88503d227109"
+  },
+  "helix:1733": {
+    "positions": "bdc0f2ba1d3b5a933f04c31ef2f5c78862f340e9e5f6449d16f62aed213139f8",
+    "phis": "10a397343f5c7550386aefc934f9a67c68ca6d04acca7659d31833015fd1b392",
+    "sizes": "d534dda6a9fe2cca09c7134b0612d811a1d60b8e63621996578d99abc665157e"
+  },
+  "ribbon:1000": {
+    "positions": "a7929b42cf15d203833da92d3e3611a4113c0a37ad372b74d163735e86a8e7ef",
+    "phis": "41f179bdb7c4d74ec13291be0befbf604978a44f8e36655d67a03ef89bde9f43",
+    "sizes": "f8a93e3069fda3c861807efc34bd84da814483e6d0c859ac61c1184a8f29487b"
+  },
+  "ribbon:1733": {
+    "positions": "e4ab6aa2c507ac37721fe63e72856a62495160acb0c97ff11ff4ec1ff9ab25ce",
+    "phis": "0e80d5e18157510323724f938e98b9865cb42eba72d742d36ae7d0ccc4958726",
+    "sizes": "f259bbc5cfb47d0eee010b7abcbbbcc050f5e28ed48f9c7b984a7d491f3cb1b3"
+  },
+  "ribbon-dispersed:1000": {
+    "positions": "ba6be6c31138ce1a4114e355e08b604264903a326ebec6b051326fb38aff2d63",
+    "phis": "73a21055120602e6d1d378202e5fe38f158224d7333b06281fc870007f609f27",
+    "sizes": "a4d8f1f4b03790edf88bf2668bab11405320ab0fcc830e28f46114738a5308cd",
+    "ribbonProgress": "f7c32957f7818274f848f85f28f0daee6dd1a1a6ed14f544d53c1e1276ccfa83"
+  },
+  "ribbon-dispersed:1733": {
+    "positions": "6409539309c7e43ce4ba005b8d9c26f7dc943550bcac36d797909df7539782d7",
+    "phis": "567510e8aa99c4abd7e216b042a46660711cff4a21d7dbeae6b060f5687464ac",
+    "sizes": "129b98b7d432c025288812b2c855655cf197239a486ded78858a5d508d83cddc",
+    "ribbonProgress": "b21e93ee182197f3c14041e31e89cacfb25bc4ca784164cb02186af6c39a4659"
+  },
+  "ribbon-dispersed-pulse:1000": {
+    "positions": "24d72137e42c7a35d3b7139f4653f0f13d5a1fba7a9460383b0ce0afaeb088f4",
+    "phis": "73a21055120602e6d1d378202e5fe38f158224d7333b06281fc870007f609f27",
+    "sizes": "d25827336206baada2f27168428d69617fe880ec2c55593b481a97093436fbe8",
+    "ribbonProgress": "f7c32957f7818274f848f85f28f0daee6dd1a1a6ed14f544d53c1e1276ccfa83"
+  },
+  "ribbon-dispersed-pulse:1733": {
+    "positions": "cae39917396bd8a116d1cae4a0435677abd634cb172c1ba2204d226e69c8df2d",
+    "phis": "567510e8aa99c4abd7e216b042a46660711cff4a21d7dbeae6b060f5687464ac",
+    "sizes": "1beb76b33db6bcbad62c4906c5c0adf6ddd7328ab68a8a4448833fb6e79879a1",
+    "ribbonProgress": "b21e93ee182197f3c14041e31e89cacfb25bc4ca784164cb02186af6c39a4659"
+  },
+  "terrain:1000": {
+    "positions": "2055160e9e1e1fa292bcca8a50a3f787150919b162ca79fee9f7d21c83bfeec4"
+  },
+  "terrain:1733": {
+    "positions": "3751ad71be5c767038084d6d2d7a68160e44d6a01e50969f6601e65277cb718b"
+  },
+  "grid:1000": {
+    "positions": "447a10d07a962a8799bdf5aa7cc97b07513c4496bd3314a47eaf7d3a79427164"
+  },
+  "grid:1733": {
+    "positions": "7dbea96342ac5ea2b88e66541a09c7cc6d021f940c92d713bb643c423855b545"
+  },
+  "dots:1000": {
+    "positions": "006a6d0ebe8b750729e3ac70240e2865f4ae884ef29a410fd7919b569a02418c"
+  },
+  "dots:1733": {
+    "positions": "0045103b1b5bb472ec1f93b39a1e0eebafe9b6eb36e76a40be4de4fa4f3f2cc5"
+  },
+  "triple-sphere:1000": {
+    "positions": "c38f74285b4c3886f7afb871b64fd4345abddc1c59e55472e4e72d9abcb677f0"
+  },
+  "triple-sphere:1733": {
+    "positions": "7b09454d61942804c05483e933acc931d5e202ff98f95e4135f6da59ca40aba2"
+  },
+  "torus:1000": {
+    "positions": "d7897c44c86228957a16af995960920edcf8195d6b0db711299d4881629be3b8"
+  },
+  "torus:1733": {
+    "positions": "a745816b3d5ced1a883b5aeb8b42c55bb404cc21521a19b62d44a3fad03919c8"
+  },
+  "dispersed:1000": {
+    "positions": "e96f09ff38500c2b994ebdba2f9dfe49819b9945db003cbddd5db4c36859f97d"
+  },
+  "dispersed:1733": {
+    "positions": "01f1ef66e9995aea68acc82b7161e69a32ee49c496aa38b4cc155035d2ddc011"
+  },
+  "hero-helix:1000": {
+    "positions": "4a05680246d6609f11b77039c56216c1f00e3e4d9cb3ec3beccb712f29f866fd",
+    "sizes": "c0be022bb5116a506232c67f6b4916fa2b2962af4ff2a4330078d3d2f1b09f81"
+  },
+  "hero-helix:1733": {
+    "positions": "66696f4edc94efd87b6778505b85f4f34f4b51befa3f5532d99489e9695482ac",
+    "sizes": "0124af427234308970a705497b76f027d4087378bb254eaba272e9df26a099a6"
+  },
+  "collapse:1000": {
+    "positions": "6635a7faf9c027d9c2161761167aee0ca57cfb973e2542e895d589e3ca4fa168",
+    "sizes": "d3c6ce0edb032e528f43089be5c001c2dd29e6655741ec47739d88503d227109"
+  },
+  "collapse:1733": {
+    "positions": "3ff77ab6cf4d4783b08091540650a3eecb16cada5d0a30691dccd7576c3a3694",
+    "sizes": "de28263c14c4fa8f7db7be517e1a269c0b955d6c3e3ae7bca4e2fd27485f74eb"
+  },
+  "volatility:1000": {
+    "positions": "c0865bcd7564d1131e6c55d37a71f201b75f9f862fe45b15fa8b393c1dcbc5c9",
+    "sizes": "d3c6ce0edb032e528f43089be5c001c2dd29e6655741ec47739d88503d227109"
+  },
+  "volatility:1733": {
+    "positions": "adfbf4ccd53ad62fa0edf67ccd914d06710deb4506d8937256c99dca275d2802",
+    "sizes": "de28263c14c4fa8f7db7be517e1a269c0b955d6c3e3ae7bca4e2fd27485f74eb"
+  }
+}

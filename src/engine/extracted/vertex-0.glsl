@@ -1,0 +1,154 @@
+attribute vec3 color;
+attribute float size;
+attribute vec3 aTargetPos;
+attribute float aTargetSize;
+attribute float aTargetHelixPhi;
+attribute float aTargetRibbonProgress;
+uniform float uMorphProgress;
+uniform float uSpriteScale;
+uniform float sizeScale;
+uniform float uDprNorm;
+uniform float uWavefront;
+uniform float uWaveFalloff;
+uniform vec3 uWaveColor;
+uniform bool uPrefersReducedMotion;
+uniform float uTime;
+uniform float uRadialFadeRadius;
+uniform float uRadialFadeFrom;
+uniform float uRadialFadeTo;
+uniform float uEntrance;
+uniform float uOrbAmp;
+uniform float uOrbFreq;
+uniform float uOrbSpeed;
+uniform float uLabProgress;
+uniform float uTerrainAmp;
+uniform float uTerrainFreq;
+uniform float uTerrainSpeed;
+uniform float uTerrainProgress;
+uniform float uHeroRibbonProgress;
+uniform float uPulseCycleS;
+uniform float uPulseBandWidth;
+uniform float uPulseTailStretch;
+uniform float uPulseFadeStart;
+uniform float uPulseBreatheDepth;
+uniform float uPulseBreatheHz;
+uniform vec3 uPulseColor;
+uniform vec3 uPulseColorEdge;
+uniform vec3 uPulseHot;
+uniform vec3 uPulseAfterglow;
+uniform float uVolatilityAmp;
+uniform float uVolatilityFreq;
+uniform float uVolatilitySpeed;
+uniform float uVolatilityProgress;
+uniform float uHelixProgress;
+uniform float uHelixTubeRadius;
+uniform float uHelixWaveAmp;
+uniform float uHelixWaveFreq;
+uniform float uHelixWaveSpeed;
+uniform float uGridProgress;
+uniform vec2 uMouseWorld;
+uniform vec2 uClickPos;
+uniform float uClickTime;
+uniform float uGridWaveAmp;
+uniform float uGridWaveFreq;
+uniform float uGridWaveSpeed;
+uniform float uGridWaveFalloff;
+uniform float uGridRippleAmp;
+uniform float uGridRippleSpeed;
+uniform float uGridRippleWidth;
+uniform float uGridRippleLife;
+uniform float uIdleDriftAmount;
+uniform float uIdleWobbleAmp;
+uniform float uIdleWobbleSpeed;
+uniform float uIdleRockAmp;
+uniform float uIdleRockSpeed;
+uniform float uPointerAmount;
+uniform float uPointerPresence;
+uniform vec2 uPointerWorld;
+uniform float uPointerRadius;
+uniform float uPointerDepth;
+uniform float uPointerDepthRange;
+uniform vec2 uPointerScreen;
+uniform float uPointerAspect;
+uniform float uPointerPush;
+uniform float uPointerRippleFreq;
+uniform float uPointerRippleSpeed;
+uniform vec2 uPointerTrailScreen;
+uniform vec2 uPointerTrailCentre;
+uniform float uPointerTrailAmount;
+uniform float uPointerTrailGain;
+uniform float uPointerSizeGain;
+uniform float uPointerTilt;
+uniform float uFreeFloatRatio;
+uniform float uFreeFloatRadius;
+uniform float uFreeFloatSpeed;
+uniform float uFreeFloatDrift;
+uniform float uFreeFloatSizeMul;
+uniform float uHalftoneProgress;
+uniform float uHalftoneNear;
+uniform float uHalftoneFar;
+uniform float uHalftoneSizeNear;
+uniform float uHalftoneSizeFar;
+uniform float uHalftoneAlphaNear;
+uniform float uHalftoneAlphaFar;
+uniform float uHalftoneMaskFrom;
+uniform float uHalftoneMaskTo;
+uniform float uHalftoneMaskAlpha;
+uniform vec3 uHalftoneInk;
+attribute float aRibbonProgress;
+attribute float helixPhi;
+attribute float aRoleHash;
+varying vec3 vColor;
+varying float vRadialAlpha;
+varying float vEntranceAlpha;
+varying float vPointerNear;
+varying float vHalftoneAlpha;
+float idleHash(float seed, float salt) {
+float x = sin(seed * 127.1 + salt * 311.7) * 43758.5453;
+return fract(x);
+}
+float ptrHash(float seed, float salt) {
+float x = sin(seed * 127.1 + salt * 311.7) * 43758.5453;
+return fract(x);
+}
+float freeHash(float seed, float salt) {
+float x = sin(seed * 127.1 + salt * 311.7) * 43758.5453;
+return fract(x);
+}
+vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+vec4 permute(vec4 x) { return mod289(((x * 34.0) + 1.0) * x); }
+vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+float snoise(vec3 v) {
+const vec2 C = vec2(1.0 / 6.0, 1.0 / 3.0);
+const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+vec3 i  = floor(v + dot(v, C.yyy));
+vec3 x0 = v - i + dot(i, C.xxx);
+vec3 g = step(x0.yzx, x0.xyz);
+vec3 l = 1.0 - g;
+vec3 i1 = min(g.xyz, l.zxy);
+vec3 i2 = max(g.xyz, l.zxy);
+vec3 x1 = x0 - i1 + C.xxx;
+vec3 x2 = x0 - i2 + C.yyy;
+vec3 x3 = x0 - D.yyy;
+i = mod289(i);
+vec4 p = permute(permute(permute(
+i.z + vec4(0.0, i1.z, i2.z, 1.0))
++ i.y + vec4(0.0, i1.y, i2.y, 1.0))
++ i.x + vec4(0.0, i1.x, i2.x, 1.0));
+float n_ = 0.142857142857;
+vec3 ns = n_ * D.wyz - D.xzx;
+vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+vec4 x_ = floor(j * ns.z);
+vec4 y_ = floor(j - 7.0 * x_);
+vec4 x = x_ * ns.x + ns.yyyy;
+vec4 y = y_ * ns.x + ns.yyyy;
+vec4 h = 1.0 - abs(x) - abs(y);
+vec4 b0 = vec4(x.xy, y.xy);
+vec4 b1 = vec4(x.zw, y.zw);
+vec4 s0 = floor(b0) * 2.0 + 1.0;
+vec4 s1 = floor(b1) * 2.0 + 1.0;
+vec4 sh = -step(h, vec4(0.0));
+vec4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
+vec4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
+vec3 p0 = vec3(a0.xy, h.x);

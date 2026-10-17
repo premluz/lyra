@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Draw three little lines. Hear them become your own tune." />
+    <title>Draw a little music — Noise Orb</title>
+  </head>
+  <body>
+    <main class="instrument shape-mode simple-mode" id="instrument">
+      <header class="masthead"><a class="wordmark" href="./" aria-label="Original Noise Orb"><span class="brand-mark">◌</span> FORM / FREQUENCY</a><span class="edition">DRAW A LITTLE MUSIC</span><button id="new-tune" class="randomise-button" type="button">New tune <span aria-hidden="true">＋</span></button><button id="exit" class="quiet-button" type="button">Exit <span aria-hidden="true">↗</span></button></header>
+      <section class="experience drawing-stage" id="drawing-stage" aria-label="Draw a little music">
+        <div class="mesh" id="mesh" tabindex="-1" aria-label="Your music, visualised as a living orb"><img class="fallback" src="./fallback.svg" alt="A softly glowing orb of particles" /></div>
+        <div class="drawing-guide" aria-live="polite"><p class="eyebrow" id="draw-step">MAKE SOMETHING YOURS</p><h1 id="draw-title">Three lines. One little tune.</h1><p id="draw-hint">Start a new tune. Then draw three lines, one sound at a time.</p></div>
+        <div class="draw-boundary" aria-hidden="true"><span id="draw-cue">NEW TUNE TO BEGIN ↑</span><span>HIGHER LINE · HIGHER NOTES</span></div>
+        <label class="drawing-shape" for="visual-shape">3D shape<select id="visual-shape" aria-label="3D shape"></select></label>
+        <div class="exit-overlay" id="exit-overlay" hidden><p class="eyebrow">TAKE A BREATH</p><h2>Until next time.</h2><button id="return" class="sound-button" type="button">Return to the orb <span aria-hidden="true">↗</span></button></div>
+      </section>
+      <section class="simple-score" id="simple-score" aria-label="Your three musical layers">
+        <div class="draw-layers" id="draw-layers" role="group" aria-label="Choose a layer to redraw"></div>
+        <div class="wave-surface" id="simple-waves"></div>
+        <p class="draw-score-hint">Your lines become the score. Choose a layer to draw it again.</p>
+        <fieldset class="simple-controls" id="simple-controls" hidden><legend class="sr-only">Shape the selected wave</legend><div class="simple-parameters"><label for="composition-style">Composition<select id="composition-style" aria-describedby="composition-help"></select></label><output id="composition-phase" aria-label="Current phrase"></output></div><p id="composition-help" class="sr-only"></p><div class="knob-row" id="simple-knobs"></div></fieldset>
+      </section>
+      <footer class="footer"><nav class="gestures" aria-label="Music demos"><a class="original-link" href="./shape.html">Advanced studio <span aria-hidden="true">↗</span></a><a class="original-link" href="./sculpt.html">Sculpt music ↗</a><a class="original-link" href="./aura.html">Aura ↗</a></nav><span class="simple-key">D MAJOR · 84 BPM</span><div class="sound-control"><span class="sound-hint" id="sound-hint">Your first touch starts the music</span><button class="sound-button" id="sound" type="button" aria-label="Start sound"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path class="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg><span id="sound-label">Sound on</span></button></div></footer>
+      <p id="draw-keyboard" class="sr-only">In the drawing area, use arrow keys to draw a line, Enter to turn it into music, and Escape to cancel. In the score, use Left and Right to choose a note, Up and Down to change its pitch, and Enter to add or remove it.</p>
+      <p id="wave-keyboard" class="sr-only">Use Left and Right to choose a note, Enter to toggle it, Up and Down to change its pitch, and Alt plus Left or Right to shift the whole wave.</p>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </main>
+    <script type="module" src="/src/simple/main.ts"></script>
+  </body>
+</html>

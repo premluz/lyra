@@ -1,0 +1,22 @@
+.music-draw-mode { --draw-unit: 8px; --draw-control-height: 62px; --draw-toolbar-height: 34px; --draw-voice-width: 150px; --simple-wave-height: 74px; --simple-header-size: 64px; --simple-footer-size: 52px; --simple-stage-size: 52svh; --simple-knob-size: 34px; }
+.music-draw-mode .draw-layers { gap: var(--draw-unit); }
+.music-draw-mode .draw-layer { padding: var(--draw-unit); min-height: var(--draw-toolbar-height); justify-content: center; }
+.music-draw-mode .draw-tools { display: flex; align-items: center; justify-content: space-between; gap: calc(var(--draw-unit) * 2); border-top: 1px solid var(--line); min-height: var(--draw-control-height); padding: var(--draw-unit) 0; }
+.music-draw-mode .draw-knobs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--draw-unit) * 3); min-width: 0; }
+.music-draw-mode .knob svg { width: var(--simple-knob-size); }
+.music-draw-mode .knob-value { height: var(--simple-label-size); font-size: var(--simple-detail-size); }
+.music-draw-mode .knob-label { font-size: var(--simple-detail-size); margin-top: calc(var(--draw-unit) / 2); }
+.music-draw-mode .draw-voice { display: flex; flex-direction: column; gap: var(--draw-unit); color: var(--muted); font: var(--simple-detail-size) var(--mono); }
+.music-draw-mode #draw-voice { width: var(--draw-voice-width); max-width: 100%; background: var(--button); color: var(--ink); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--draw-unit); font: var(--simple-label-size) var(--mono); }
+.music-draw-mode .draw-actions { display: flex; gap: var(--draw-unit); align-items: center; min-height: var(--draw-toolbar-height); overflow-x: auto; white-space: nowrap; }
+.music-draw-mode .draw-actions button { flex-shrink: 0; }
+.music-draw-mode .footer .gestures { display: flex; flex-direction: row; overflow-x: auto; white-space: nowrap; gap: calc(var(--draw-unit) * 2); }
+.music-draw-mode .drawing-guide { max-width: 42em; }
+.music-draw-mode #drawing-area { z-index: 2; }
+.music-draw-mode .exit-overlay { z-index: 4; }
+.music-draw-mode[data-generating='true'] #draw-hint { color: var(--accent); }
+@media (max-width: 640px) {
+  .music-draw-mode { --draw-voice-width: 110px; --simple-stage-min: 280px; --simple-stage-size: 48svh; --simple-wave-height: 64px; }
+  .music-draw-mode .draw-knobs { gap: var(--draw-unit); }
+  .music-draw-mode .wordmark { font-size: var(--simple-detail-size); }
+}

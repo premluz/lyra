@@ -1,0 +1,24 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, sans-serif;
+  --demo-dark: #111416;
+  --demo-text: #e9f2ed;
+  --demo-error: #ffb7b7;
+  --demo-border: #555555;
+  --demo-light: #e9eeea;
+  --demo-light-ink: #171c1a;
+  background: var(--demo-dark);
+  color: var(--demo-text);
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+.particle-host { position: fixed; inset: 0; pointer-events: auto; }
+.particle-canvas { width: 100%; height: 100%; display: block; }
+main { position: relative; pointer-events: none; }
+section { height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8vw; }
+h1, h2 { font-size: clamp(3rem, 7vw, 8rem); line-height: .95; max-width: 9ch; font-weight: 500; letter-spacing: -.05em; }
+p { max-width: 28rem; opacity: .7; }
+header { position: fixed; top: 2rem; left: 8vw; z-index: 2; font-size: .75rem; letter-spacing: .15em; }
+#error { position: fixed; bottom: 2rem; left: 8vw; color: var(--demo-error); z-index: 3; }
+button { position: fixed; right: 2rem; top: 2rem; z-index: 3; padding: .7rem 1rem; border: 1px solid var(--demo-border); border-radius: 6px; cursor: pointer; }
+body.light { background: var(--demo-light); color: var(--demo-light-ink); }

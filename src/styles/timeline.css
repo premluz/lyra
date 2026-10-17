@@ -1,0 +1,21 @@
+.timeline { border-top: 1px solid var(--line); background: var(--panel-deep); padding: var(--space-3); min-width: 0; }
+.timeline-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
+.panel-title { font: 9px var(--mono); color: var(--muted); letter-spacing: 1px; }
+.timeline-top .badge { font-size: 8px; }
+.transport { display: flex; align-items: center; gap: 2px; }
+.transport code { color: var(--accent); min-width: 101px; text-align: center; font-size: 9px; }
+.transport code span { color: var(--dim); }
+.timeline-ruler { display: flex; justify-content: space-between; margin: var(--space-2) 3px 5px; color: var(--dim); font: 8px var(--mono); }
+.timeline-slider { position: relative; display: flex; align-items: center; height: 17px; width: 100%; user-select: none; touch-action: none; }
+.timeline-track { position: relative; flex: 1; height: 5px; border-radius: 2px; background: var(--line); }
+.timeline-fill { position: absolute; height: 100%; background: var(--accent-border); }
+.playhead { display: block; width: 6px; height: 15px; background: var(--accent); border-radius: 2px; box-shadow: 0 0 0 2px var(--panel-deep); }
+.sequence-cards { display: flex; gap: var(--space-2); margin-top: var(--space-2); overflow-x: auto; padding-bottom: var(--space-1); scrollbar-width: thin; scrollbar-color: var(--line) var(--panel-deep); }
+.sequence-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); display: flex; align-items: center; gap: var(--space-2); color: var(--muted); min-width: 140px; flex: 1; padding: var(--space-3) var(--space-2); text-align: left; }
+.sequence-card.selected { border-color: var(--accent-border); background: var(--accent-soft); color: var(--accent); }
+.sequence-card:hover { border-color: var(--dim); }
+.sequence-number { font: 9px var(--mono); color: var(--dim); }
+.sequence-card strong { font-size: var(--small-text); font-weight: 500; display: block; }
+.sequence-card small { font-size: 8px; color: var(--dim); display: block; margin-top: 5px; white-space: nowrap; }
+.sequence-card code { margin-left: auto; color: var(--dim); font-size: 8px; }
+@media (max-width: 1200px) { .timeline-top .badge { display: none; } .timeline-top { gap: var(--space-1); } .timeline-top .small-button { font-size: 9px; } .sequence-card { min-width: 135px; } }

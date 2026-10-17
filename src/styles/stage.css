@@ -1,0 +1,28 @@
+.center-workbench { min-height: 0; min-width: 0; display: grid; grid-template-rows: minmax(0, 1fr) var(--timeline-height); }
+.stage-area { min-height: 0; display: grid; grid-template-rows: 35px minmax(0, 1fr) 31px; padding: 0 var(--space-3); }
+.stage-toolbar { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: var(--small-text); }
+.stage-toolbar .toolbar-group:first-child { gap: var(--space-2); }
+.stage { position: relative; isolation: isolate; overflow: hidden; background: var(--stage); border: 1px solid var(--line); border-radius: var(--radius); }
+.stage.has-grid { background-image: linear-gradient(var(--grid-dark) 1px, var(--transparent) 1px), linear-gradient(90deg, var(--grid-dark) 1px, var(--transparent) 1px); background-size: 48px 48px; }
+.stage-light { background-color: var(--stage-light); color: var(--stage-light-text); }
+.stage-light.has-grid { background-image: linear-gradient(var(--grid-light) 1px, var(--transparent) 1px), linear-gradient(90deg, var(--grid-light) 1px, var(--transparent) 1px); }
+.stage-canvas { position: absolute; inset: 0; }
+.particle-canvas { display: block; width: 100%; height: 100%; }
+.viewport-label { position: absolute; top: var(--space-4); left: var(--space-4); font: 9px var(--mono); letter-spacing: 1px; color: var(--dim); display: flex; align-items: center; gap: var(--space-2); z-index: 2; pointer-events: none; }
+.viewport-label > span:nth-child(2) { color: var(--line); }
+.viewport-bottom { position: absolute; bottom: var(--space-4); left: var(--space-4); right: var(--space-4); color: var(--dim); display: flex; justify-content: space-between; pointer-events: none; font: 8px var(--mono); letter-spacing: .8px; z-index: 2; }
+.viewport-bottom code { font-size: 8px; }
+.stage-caption { display: flex; align-items: center; gap: 6px; color: var(--dim); font-size: 9px; }
+.stage-caption > span:nth-child(3) { margin-left: var(--space-2); }
+.stage-caption button { margin-left: auto; border: 0; background: var(--transparent); color: var(--dim); font-size: 9px; }
+.stage-caption button:hover { color: var(--accent); }
+.loading-state { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font: var(--ui-text) var(--mono); background: var(--stage); z-index: 5; }
+.scroll-surface { position: absolute; inset: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--accent-border) var(--transparent); }
+.scroll-space { min-height: 300%; position: relative; padding: 12% 10%; display: flex; flex-direction: column; justify-content: space-between; }
+.scroll-instruction { max-width: 70%; pointer-events: none; }
+.scroll-instruction > span { font: 9px var(--mono); letter-spacing: 1.4px; color: var(--muted); }
+.scroll-instruction h2 { font-size: clamp(34px, 4vw, 66px); line-height: 1.04; font-weight: 400; letter-spacing: -2.5px; margin: var(--space-6) 0 var(--space-4); }
+.scroll-instruction p { color: var(--muted); max-width: 200px; font-size: var(--ui-text); line-height: 1.7; }
+.scroll-instruction .scroll-arrow { display: block; margin-top: 30px; font-size: 22px; color: var(--accent); }
+.scroll-end { font: var(--small-text) var(--mono); color: var(--muted); margin-bottom: 70px; }
+.stage:fullscreen { width: 100vw; height: 100vh; border: 0; border-radius: 0; }

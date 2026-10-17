@@ -1,0 +1,30 @@
+.sculpt-mode {
+  --sculpt-unit: 8px; --sculpt-caption-size: 9px; --sculpt-stage-size: 52svh;
+  --simple-stage-size: var(--sculpt-stage-size); --simple-stage-min: 300px;
+  --simple-wave-height: 92px; --sculpt-control-width: 220px;
+}
+.sculpt-tabs { display: flex; gap: calc(var(--sculpt-unit) * 3); font: var(--simple-label-size) var(--mono); }
+.sculpt-tabs a { color: var(--muted); text-decoration: none; padding: var(--sculpt-unit) 0; }
+.sculpt-tabs a[aria-current='page'] { color: var(--accent); border-bottom: 1px solid var(--accent); }
+.sculpt-actions { margin-left: auto; display: flex; align-items: center; gap: calc(var(--sculpt-unit) * 2); }
+#sculpt-area { position: absolute; inset: 0; z-index: 2; cursor: crosshair; touch-action: none; outline-offset: calc(var(--sculpt-unit) * -1); }
+#sculpt-area[data-near='true'] { cursor: grab; }
+#sculpt-area[data-dragging='true'] { cursor: grabbing; }
+.sculpt-caption { position: absolute; bottom: 0; left: var(--gutter); right: var(--gutter); display: flex; justify-content: space-between; gap: var(--sculpt-unit); padding-bottom: calc(var(--sculpt-unit) * 2); border-bottom: 1px solid var(--line); color: var(--muted); font: var(--sculpt-caption-size) var(--mono); pointer-events: none; z-index: 3; }
+#sculpt-feedback { color: var(--accent); }
+.sculpt-sound { display: flex; align-items: center; gap: calc(var(--sculpt-unit) * 2); margin-bottom: var(--sculpt-unit); }
+.sculpt-sound .voice-picker { width: var(--sculpt-control-width); margin: 0; }
+.sculpt-sound > span { margin-left: auto; color: var(--muted); font: var(--simple-detail-size) var(--mono); }
+.sculpt-mode .simple-controls { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: calc(var(--sculpt-unit) * 4); align-items: center; }
+.sculpt-mode .simple-parameters { margin: 0; }
+.sculpt-mode .simple-controls .knob-row { min-width: 0; }
+[data-exited='true'] #sculpt-area { pointer-events: none; }
+@media (max-width: 640px) {
+  .sculpt-mode { --sculpt-stage-size: 48svh; --sculpt-caption-size: 7px; }
+  .sculpt-tabs { gap: var(--sculpt-unit); }
+  .sculpt-actions { gap: var(--sculpt-unit); }
+  .sculpt-actions #new-tune { font-size: var(--simple-detail-size); padding: var(--sculpt-unit); }
+  .sculpt-actions #undo-shape { font-size: var(--simple-detail-size); }
+  .sculpt-mode .quiet-button span, .sculpt-sound > span { display: none; }
+  .sculpt-mode .simple-controls { grid-template-columns: minmax(0, 1fr); gap: var(--sculpt-unit); }
+}
