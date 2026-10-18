@@ -1,0 +1,2 @@
+[data-composer='v3'] .model-status { color: var(--muted); font: var(--studio-text-small)/1.4 var(--mono); max-width: 28em; flex-shrink: 0; }
+[data-generating='true'] .model-status { color: var(--accent); }

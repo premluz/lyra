@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Draw a melody, hear it instantly, and shape it into your own music with MusicVAE." />
+    <title>Draw Music — Your line, your melody</title>
+  </head>
+  <body>
+    <main class="instrument shape-mode simple-mode music-draw-mode" id="instrument">
+      <header class="masthead"><a class="wordmark" href="./advanced-v3.html">◌ DRAW MUSIC</a><span class="edition">YOUR LINE. YOUR MELODY.</span><button id="new-tune" class="randomise-button" type="button">New tune ＋</button><button id="exit" class="quiet-button" type="button" aria-label="Exit">Exit ↗</button></header>
+      <section class="experience drawing-stage" id="drawing-stage" aria-label="Draw Music instrument">
+        <div class="mesh" id="mesh" tabindex="-1" aria-label="Your music, visualised as a living orb"><img class="fallback" src="./fallback.svg" alt="A softly glowing orb of particles" /></div>
+        <div class="drawing-guide"><p class="eyebrow">PLAY WITH A LINE</p><h1>Draw your hook.</h1><p id="draw-hint" role="status">Hear every move as you draw. Higher is higher. Hold to linger. Release to hear your phrase take shape.</p></div>
+        <div class="draw-boundary" aria-hidden="true"><span>LEFT → RIGHT · TIME</span><span>DRAW ANYWHERE ABOVE THIS LINE</span></div>
+        <div class="exit-overlay" id="exit-overlay" hidden><p class="eyebrow">TAKE A BREATH</p><h2>Until next time.</h2><button id="return" class="sound-button" type="button">Return to the orb ↗</button></div>
+      </section>
+      <section class="simple-score" id="simple-score" aria-label="Your musical layers">
+        <div class="draw-layers" id="draw-layers" role="group" aria-label="Choose a sound to draw"></div>
+        <div class="wave-surface" id="simple-waves"></div>
+        <div class="draw-tools"><label class="draw-voice">Sound<select id="draw-voice" aria-label="Drawing instrument"></select></label><div class="draw-knobs" id="draw-knobs"></div></div>
+        <div class="draw-actions"><button id="shape-phrase" class="randomise-button" type="button">Shape my phrase</button><button id="cancel-generation" class="lane-toggle" type="button" hidden>Cancel generation</button><button id="undo-drawing" class="lane-toggle" type="button">Undo</button><button id="clear-layer" class="lane-toggle" type="button">Clear layer</button><button id="export-setup" class="lane-toggle" type="button">Export setup ↓</button></div>
+      </section>
+      <footer class="footer"><nav class="gestures" aria-label="Music demos"><a class="original-link" href="./advanced-v3.html">Advanced V3 ↗</a><a class="original-link" href="./advanced-v2.html">Advanced V2 ↗</a><a class="original-link" href="./draw.html">Simple ↗</a></nav><div class="sound-control"><span class="sr-only" id="sound-hint">Your first touch starts the music</span><button id="sound" class="sound-button" type="button" aria-label="Start sound"><span id="sound-label">Sound on</span></button></div></footer>
+      <select id="render-treatment" aria-label="Render treatment" hidden><option value="glow">Chromatic glow</option></select>
+      <p class="sr-only" id="draw-keyboard">Use arrows to draw and hear a line, Enter to finish it, and Escape to cancel. Select another sound to draw another layer.</p>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </main>
+    <script type="module" src="/src/draw-music/main.ts"></script>
+  </body>
+</html>

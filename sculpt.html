@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Pull a melody into shape. A musical instrument made of particles." />
+    <title>Sculpt the music — Noise Orb</title>
+  </head>
+  <body>
+    <main class="instrument shape-mode simple-mode sculpt-mode" id="instrument">
+      <header class="masthead">
+        <nav class="sculpt-tabs" aria-label="Music demos"><a href="./shape.html">Advanced</a><a href="./draw.html">Simple</a><a href="./sculpt.html" aria-current="page">Sculpt</a></nav>
+        <div class="sculpt-actions"><button id="undo-shape" class="lane-toggle" type="button" disabled>Undo shape</button><button id="new-tune" class="randomise-button" type="button">New tune ＋</button><button id="exit" class="quiet-button" type="button">Exit <span aria-hidden="true">↗</span></button></div>
+      </header>
+      <section class="experience drawing-stage" id="sculpt-stage" aria-label="Sculpt the music">
+        <div class="mesh" id="mesh"><img class="fallback" src="./fallback.svg" alt="A softly glowing orb of particles" /></div>
+        <div id="sculpt-area" role="application" tabindex="0" aria-label="Sculpt your selected sound. Move near the orb to change its tone. Drag up or down to bend nearby notes, sideways for brightness, and pull further for longer notes. Space grabs the center, arrows reshape, Enter releases, Escape cancels." aria-describedby="sculpt-instructions"></div>
+        <div class="sculpt-caption"><span id="sculpt-instructions">MOVE TO COLOUR · DRAG TO COMPOSE</span><output id="sculpt-feedback">Choose a sound below</output></div>
+        <div class="exit-overlay" id="exit-overlay" hidden><p class="eyebrow">TAKE A BREATH</p><h2>Until next time.</h2><button id="return" class="sound-button" type="button">Return to the orb <span aria-hidden="true">↗</span></button></div>
+      </section>
+      <section class="simple-score" id="simple-score" aria-label="Your three musical layers">
+        <div class="draw-layers" id="draw-layers" role="group" aria-label="Choose a sound to sculpt"></div>
+        <div class="wave-surface" id="simple-waves"></div>
+        <div class="sculpt-sound"><label class="voice-picker">Sound<select id="sculpt-voice"></select></label><button id="sculpt-toggle" class="lane-toggle" type="button">Playing</button><span>UP / DOWN · NOTES &nbsp; SIDEWAYS · TONE &nbsp; PULL · LENGTH</span></div>
+        <fieldset class="simple-controls" id="simple-controls"><legend class="sr-only">Shape the selected wave</legend><div class="simple-parameters"><label for="composition-style">Composition<select id="composition-style" aria-describedby="composition-help"></select></label><output id="composition-phase" aria-label="Current phrase"></output></div><p id="composition-help" class="sr-only"></p><div class="knob-row" id="simple-knobs"></div></fieldset>
+      </section>
+      <footer class="footer"><a class="original-link" href="./aura.html">Enter Aura ↗</a><span class="simple-key">D MAJOR · 84 BPM</span><div class="sound-control"><span class="sound-hint" id="sound-hint">Click to begin. Hover never starts sound.</span><button class="sound-button" id="sound" type="button" aria-label="Start sound"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path class="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg><span id="sound-label">Sound on</span></button></div></footer>
+      <p id="wave-keyboard" class="sr-only">Use Left and Right to select a note, Up and Down to change its pitch, and Enter to toggle it. Alt plus Left or Right shifts the whole wave.</p>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </main>
+    <script type="module" src="/src/sculpt/main.ts"></script>
+  </body>
+</html>
