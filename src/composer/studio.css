@@ -61,7 +61,7 @@
 .studio-mode .continuous-controls input, .studio-mode .continuous-controls select { min-height: var(--studio-field-height); font-size: var(--studio-text); }
 .studio-mode .dev-settings { flex-shrink: 0; margin-left: auto; color: var(--muted); font: var(--studio-text)/1.7 var(--mono); }
 .studio-mode .dev-settings > summary { cursor: pointer; padding: var(--studio-gap) var(--studio-unit); white-space: nowrap; }
-.studio-mode .dev-settings-panel { position: absolute; right: var(--studio-pane-padding); bottom: calc(100% + var(--studio-gap)); z-index: 10; width: min(var(--studio-popup-width), calc(100vw - var(--gutter) * 2)); max-height: var(--studio-popup-height); overflow-y: auto; overscroll-behavior: contain; padding: calc(var(--studio-unit) * 3); background: var(--dock-bg); border: 1px solid var(--line); border-radius: var(--studio-unit); }
+.studio-mode .dev-settings-panel { position: absolute; right: var(--studio-pane-padding); bottom: calc(100% + var(--studio-toolbar-height) + var(--studio-unit) * 2); z-index: 10; width: min(var(--studio-popup-width), calc(100vw - var(--gutter) * 2)); max-height: var(--studio-popup-height); overflow-y: auto; overscroll-behavior: contain; padding: calc(var(--studio-unit) * 3); background: var(--dock-bg); border: 1px solid var(--line); border-radius: var(--studio-unit); }
 .studio-mode .dev-mode-links { display: grid; gap: var(--studio-unit); margin-bottom: calc(var(--studio-unit) * 3); padding-bottom: calc(var(--studio-unit) * 3); border-bottom: 1px solid var(--line); }
 .studio-mode .dev-mode-links a { color: var(--muted); text-decoration: none; font: var(--studio-text) var(--mono); }
 .studio-mode .dev-mode-links a:hover, .studio-mode .dev-mode-links a[aria-current='page'] { color: var(--accent); }
@@ -72,7 +72,7 @@
 .studio-mode .dev-settings .arrangement-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .studio-mode .dev-settings .arrangement-controls > label:first-child, .studio-mode .dev-settings #fade-out { grid-column: 1 / -1; }
 .studio-mode .dev-settings .loop-label { margin: calc(var(--studio-unit) * 2) 0 0; max-width: none; text-align: left; font-size: var(--studio-text-tiny); }
-.studio-mode .studio-bottom-actions { display: flex; justify-content: flex-end; align-items: center; gap: var(--studio-unit); pointer-events: none; }
+.studio-mode .studio-bottom-actions { position: relative; z-index: calc(var(--studio-overlay-z) + 1); display: flex; justify-content: flex-end; align-items: center; gap: var(--studio-unit); pointer-events: none; }
 .studio-mode .studio-bottom-actions > * { pointer-events: auto; }
 .studio-mode .studio-bottom-actions .studio-icon-button { display: inline-flex; align-items: center; justify-content: center; width: var(--studio-toolbar-height); height: var(--studio-toolbar-height); min-height: var(--studio-toolbar-height); padding: var(--studio-gap); border: var(--studio-pane-line-width) solid var(--line); border-radius: var(--radius); background: var(--studio-pane-background); color: var(--ink); backdrop-filter: blur(var(--studio-pane-blur)); }
 .studio-mode .studio-icon-button svg { width: var(--studio-icon-size); height: var(--studio-icon-size); fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
