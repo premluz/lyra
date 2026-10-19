@@ -26,6 +26,7 @@ test('an empty authored score has no pad, automatic tune or pointer notes', asyn
 });
 
 test('authored notes, wave edits and render treatment all change the rendered orb at audio time', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('noise-orb:wrap-waves', 'false'));
   const errors: string[] = []; page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/shape.html'); await page.getByRole('button', { name: 'Exit', exact: true }).click();
   const result = await page.evaluate(async () => {

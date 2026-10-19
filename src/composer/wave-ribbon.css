@@ -50,12 +50,10 @@
 .wave-petals { pointer-events: none; }
 .wave-petal-rim { fill: none; vector-effect: non-scaling-stroke; }
 .wave-ribbon[data-enabled='false'] .wave-petals { opacity: .08; }
-.wave-ripples { pointer-events: none; }
-.wave-ripples path { fill: none; stroke: currentColor; pointer-events: none; }
 .wave-wrap .wave-ribbon-glow { opacity: .48; }
 .wave-wrap .wave-ribbon[data-selected='true'] .wave-ribbon-glow { opacity: .62; }
 @media (prefers-reduced-transparency: reduce) {
-  .wave-ripples, .wave-petals { display: none; }
+  .wave-petals { display: none; }
 }
 .wave-wrap-switch { margin-bottom: var(--visual-control-gap); }
 [data-waves-wrapped='true'] .wave-surface:not(.wave-wrap) .wave-ribbon-fill,

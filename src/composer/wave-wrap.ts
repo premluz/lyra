@@ -7,7 +7,7 @@ import { element, report } from '../ui';
 import { WrappedHandles } from './wrapped-handles';
 import { WrappedGesture } from './wrapped-gesture';
 import type { WrappedPulse } from './wave-wrap-geometry';
-import { WaveRipples } from './wave-ripples';
+import type { WaveRipples, RippleProfile } from './wave-ripples';
 
 const CLOCK = { milliseconds: 1000 } as const;
 const OUTWARD_WAVES = { key: 'noise-orb:outward-waves', label: 'Outward waves & petals' } as const;
@@ -18,14 +18,13 @@ export class WaveWrap {
   private handles: WrappedHandles;
   private gesture: WrappedGesture;
   private ribbons = new Map<string, WaveRibbon>();
-  private ripples = new Map<string, WaveRipples>();
   private pulses: { lane: string; time: number; phase: number }[] = [];
   private time = 0;
   private painted = -Infinity;
-  private enabled = localStorage.getItem(WAVE_WRAP.key) === 'true';
+  private enabled = localStorage.getItem(WAVE_WRAP.key) !== 'false';
   private outwardEnabled = localStorage.getItem(OUTWARD_WAVES.key) !== 'false';
 
-  constructor(private score: Score, audition: (step: number) => void) {
+  constructor(private score: Score, audition: (step: number) => void, private ripples: WaveRipples) {
     this.host.className = 'wave-wrap'; this.host.id = 'wrapped-waves'; this.host.append(this.drawing);
     const c = WAVE_WRAP.center, r = WAVE_WRAP.editRadius;
     this.drawing.append(svg('path', { class: 'wrap-add-zone', d: `M${c},${c - r} A${r},${r} 0 1 1 ${c},${c + r} A${r},${r} 0 1 1 ${c},${c - r}`, 'stroke-width': WAVE_WRAP.editWidth,
@@ -54,28 +53,27 @@ export class WaveWrap {
     label.title = 'Show expanding waves, glows and petal lighting. Turn off to reduce graphics work.';
     input.addEventListener('change', () => {
       this.outwardEnabled = input.checked;
-      this.ripples.forEach(ripple => ripple.setEnabled(this.outwardEnabled));
+      this.ripples.setEnabled(this.enabled && this.outwardEnabled); this.render();
       try { localStorage.setItem(OUTWARD_WAVES.key, String(this.outwardEnabled)); } catch (error) { report(error); }
     });
     return label;
   }
 
   update() {
+    this.ripples.setEnabled(this.enabled && this.outwardEnabled);
     this.host.hidden = !this.enabled; element('instrument', HTMLElement).dataset.wavesWrapped = String(this.enabled);
     element('mesh', HTMLDivElement).dataset.frameScale = String(this.enabled ? WAVE_WRAP.orbScale : 1);
     for (const [id, ribbon] of this.ribbons) {
       if (!this.score.state.lanes.some(lane => lane.id === id)) {
-        ribbon.element.remove(); this.ribbons.delete(id); this.ripples.get(id)?.element.remove(); this.ripples.delete(id);
+        ribbon.element.remove(); this.ribbons.delete(id);
       }
     }
     for (const lane of this.score.state.lanes) {
       if (!this.ribbons.has(lane.id)) {
         const ribbon = new WaveRibbon('radial'); ribbon.edge.setAttribute('class', 'wrapped-wave-line');
         ribbon.edge.dataset.lane = lane.id;
-        const ripple = new WaveRipples(ribbon.edge, ribbon.lightingId); this.ripples.set(lane.id, ripple); this.drawing.prepend(ripple.element);
         this.ribbons.set(lane.id, ribbon); this.drawing.append(ribbon.element);
       }
-      this.ripples.get(lane.id)?.setEnabled(this.outwardEnabled);
     }
     this.render();
   }
@@ -95,10 +93,7 @@ export class WaveWrap {
 
   private render() {
     if (!this.enabled) return;
-    const viewport = this.drawing.getBoundingClientRect();
-    if (!viewport.width || !viewport.height) throw new Error('Wrapped waves need a measurable viewport.');
-    const aspect = Math.max(viewport.width / viewport.height, viewport.height / viewport.width);
-    const reach = WAVE_WRAP.center * aspect / WAVE_WRAP.editRadius - 1;
+    const echoes: RippleProfile[] = [];
     const profiles = new Map<string, readonly WrappedPulse[]>();
     for (const lane of this.score.state.lanes) {
       const ribbon = this.ribbons.get(lane.id);
@@ -109,9 +104,11 @@ export class WaveWrap {
         .map(note => ({ phase: note.phase, strength: (1 - (this.time - note.time) / WAVE_WRAP.pulseLife) ** 2 }));
       profiles.set(lane.id, pulses);
       const paths = wrappedPaths(lane, this.time, pulses); ribbon.draw(paths.edge, paths.area);
-      this.ripples.get(lane.id)?.paint(lane.role, lane.enabled && isAudible(lane, this.score.state.ambientTools) && filled,
-        Math.min(1, pulses.reduce((sum, pulse) => sum + pulse.strength, 0)), reach);
+      if (lane.enabled && isAudible(lane, this.score.state.ambientTools) && filled) echoes.push({
+        radii: paths.radii, role: lane.role, energy: Math.min(1, pulses.reduce((sum, pulse) => sum + pulse.strength, 0)),
+      });
     }
+    this.ripples.update(echoes);
     this.handles.update(this.time, profiles);
   }
 }

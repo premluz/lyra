@@ -39,6 +39,7 @@ export class OrbMesh {
     }
     this.renderer = new WebGLRenderer({ canvas: context.canvas, context, alpha: true, antialias: true, preserveDrawingBuffer: true });
     this.renderer.setClearColor(0, 0);
+    this.renderer.autoClear = false;
     this.renderer.domElement.setAttribute('aria-hidden', 'true');
     this.renderer.debug.onShaderError = (gl, program, vertex, fragment) => {
       throw new Error(`Noise Orb shader: ${gl.getProgramInfoLog(program)}\nVertex: ${gl.getShaderInfoLog(vertex)}\nFragment: ${gl.getShaderInfoLog(fragment)}`);
@@ -106,6 +107,9 @@ export class OrbMesh {
     u.uSwell.value.y += (this.pointer.z - u.uSwell.value.y) * factor;
     this.wake *= Math.exp(-delta / VIEW.wakeDecay);
     u.uWake.value.set(this.pointer.x, this.pointer.z, this.wake);
+    this.renderer.clear();
+    this.visual?.background?.render(this.renderer, delta);
+    this.renderer.clearDepth();
     this.renderer.render(this.scene, this.camera);
   }
 

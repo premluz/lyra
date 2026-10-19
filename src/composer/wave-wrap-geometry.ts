@@ -34,14 +34,12 @@ function coordinate(phase: number, radius: number) {
   const point = wrappedPoint(phase, radius); return `${point.x.toFixed(2)},${point.y.toFixed(2)}`;
 }
 export function wrappedPaths(lane: Lane, time: number, pulses: readonly WrappedPulse[]) {
-  const points = Array.from({ length: COMPOSE.samples + 1 }, (_, sample) => {
-    const phase = sample / COMPOSE.samples;
-    return coordinate(phase, wrappedRadius(lane, phase, time, pulses));
-  });
+  const radii = Float32Array.from({ length: COMPOSE.samples + 1 }, (_, sample) => wrappedRadius(lane, sample / COMPOSE.samples, time, pulses));
+  const points = Array.from(radii, (radius, sample) => coordinate(sample / COMPOSE.samples, radius));
   const edge = points.map((position, index) => `${index ? 'L' : 'M'}${position}`).join(' ') + ' Z';
   const inner = Array.from({ length: COMPOSE.samples + 1 }, (_, sample) => {
     const phase = 1 - sample / COMPOSE.samples;
     return `${sample ? 'L' : 'M'}${coordinate(phase, WAVE_WRAP.radius - WAVE_WRAP.innerFade + height(lane, phase, time) * WAVE_WRAP.innerDepth)}`;
   }).join(' ') + ' Z';
-  return { edge, area: `${edge} ${inner}` };
+  return { edge, area: `${edge} ${inner}`, radii };
 }

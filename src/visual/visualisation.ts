@@ -1,9 +1,14 @@
-import type { Blending } from 'three';
+import type { Blending, WebGLRenderer } from 'three';
 import type { AudioFrame } from '../audio/meter';
 import type { NoteEvent, TouchPoint } from '../score';
 import type { MusicShape } from './surface';
 
+export interface VisualBackground {
+  render(renderer: WebGLRenderer, delta: number): void;
+}
+
 export interface OrbVisualisation {
+  readonly background?: VisualBackground;
   readonly vertexShader: string;
   readonly fragmentShader: string;
   readonly uniforms: Record<string, { value: unknown }>;

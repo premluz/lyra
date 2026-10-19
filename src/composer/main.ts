@@ -45,7 +45,7 @@ function startComposer() {
     if (preview && !isContinuous(score.selected) && score.selected.enabled && note.velocity > 0) sound?.preview(note);
     void session.start().catch(report);
   };
-  wrapped = new WaveWrap(score, audition);
+  wrapped = new WaveWrap(score, audition, visual.background);
   dock = new WaveDock(score, audition, mode.magenta ? generationControls(score, () => session.start()) : undefined);
   arrangement = new Arrangement(score, () => { void session.start().catch(report); }, () => session.fadeOut(score.state.fadeSeconds)); arrangement.update();
   const host = element('composer', HTMLElement);

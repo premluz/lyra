@@ -34,11 +34,6 @@ export class WaveRibbon {
     this.petals?.paint(area);
   }
 
-  get lightingId() {
-    if (!this.petals) throw new Error('Only radial ribbons provide petal lighting.');
-    return this.petals.lightingId;
-  }
-
   state(role: string, selected: boolean, enabled: boolean, visible: boolean, filled: boolean) {
     this.element.setAttribute('class', `wave-ribbon lane-${role}`);
     this.element.dataset.selected = String(selected); this.element.dataset.enabled = String(enabled);

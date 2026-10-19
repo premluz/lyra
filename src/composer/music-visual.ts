@@ -12,6 +12,7 @@ import { COMPOSE } from './config';
 import type { Score } from './model';
 import type { ScorePlayback } from './playback';
 import { MusicField } from './music-field';
+import { WaveRipples } from './wave-ripples';
 import { MUSIC_VISUAL as V, MUSIC_SHADER } from './visual-config';
 import type { MusicTreatment } from './visual-config';
 import vertex from './music-vertex.glsl?raw';
@@ -50,6 +51,7 @@ export class MusicVisual implements OrbVisualisation {
   readonly vertexShader = `${shaderPrelude}\n${constants}\n${lifeShader}\n${vertex}`;
   readonly fragmentShader = `${constants}\n${fragment}`;
   readonly field: MusicField;
+  readonly background = new WaveRipples();
   readonly life = new OrbLife();
   private texture: DataTexture;
   readonly uniforms;
@@ -82,5 +84,5 @@ export class MusicVisual implements OrbVisualisation {
     this.score.state.lanes.forEach((lane, index) => { this.uniforms.uMusicPositions.value[index] = Math.max(0, this.playback.position(time, lane.id)) / lane.notes.length; });
   }
   reset() { this.field.reset(); this.life.reset(); }
-  dispose() { this.texture.dispose(); }
+  dispose() { this.background.dispose(); this.texture.dispose(); }
 }
