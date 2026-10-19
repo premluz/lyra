@@ -27,7 +27,6 @@ export class WaveDock {
   readonly surface: WaveSurface;
 
   constructor(private score: Score, private audition: (step: number, preview?: boolean) => void, randomise?: () => void) {
-    this.settingsToggle();
     this.focusToggle();
     this.lanes = new LaneList(score); this.controls = new LaneControls(score, () => this.audition(this.selectedStep));
     this.rhythm = new RhythmControls(score, () => this.audition(this.selectedStep, false));
@@ -41,24 +40,9 @@ export class WaveDock {
     this.knobs = KNOBS.map((knob) => new Knob(knob.key, knob.label, knob.hint, (value) => score.setKnob(knob.key, value), () => audition(this.selectedStep)));
     element('knobs', HTMLDivElement).append(...this.knobs.map((knob) => knob.element)); this.update();
   }
-  private settingsToggle() {
-    const header = document.querySelector('.shaping-header'), controls = document.querySelector('.shaping-controls');
-    if (!(header instanceof HTMLElement) || !(controls instanceof HTMLElement)) throw new Error('Advanced settings need the shaping header and controls.');
-    const button = document.createElement('button'), root = element('instrument', HTMLElement);
-    button.type = 'button'; button.className = 'advanced-settings-toggle'; controls.id = 'advanced-sound-settings';
-    button.setAttribute('aria-controls', controls.id);
-    const update = () => {
-      button.textContent = controls.hidden ? 'Advanced ▾' : 'Advanced ▴';
-      button.setAttribute('aria-expanded', String(!controls.hidden));
-      button.setAttribute('aria-label', `${controls.hidden ? 'Expand' : 'Collapse'} advanced settings`);
-      root.dataset.advancedCollapsed = String(controls.hidden);
-    };
-    button.addEventListener('click', () => { controls.hidden = !controls.hidden; update(); });
-    header.prepend(button); update();
-  }
   private focusToggle() {
-    const experience = document.querySelector('.experience'), root = element('instrument', HTMLElement);
-    if (!(experience instanceof HTMLElement)) throw new Error('Focus mode needs the instrument viewport.');
+    const header = document.querySelector('.shaping-header'), root = element('instrument', HTMLElement);
+    if (!(header instanceof HTMLElement)) throw new Error('Focus mode needs the composer settings header.');
     const button = document.createElement('button');
     button.type = 'button'; button.className = 'focus-settings-toggle'; button.setAttribute('aria-controls', 'composer');
     const update = () => {
@@ -67,7 +51,7 @@ export class WaveDock {
       button.setAttribute('aria-expanded', String(expanded));
     };
     button.addEventListener('click', () => { root.dataset.focusMode = String(root.dataset.focusMode !== 'true'); update(); });
-    experience.append(button); update();
+    header.insertBefore(button, header.firstChild); update();
   }
   update() {
     const lane = this.score.selected, label = lane.name;

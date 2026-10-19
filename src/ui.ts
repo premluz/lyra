@@ -3,11 +3,16 @@ export function element<T extends HTMLElement>(id: string, type: { new(): T }) {
   if (!(node instanceof type)) throw new Error(`Noise Orb is missing #${id}.`);
   return node;
 }
+export function optionalElement<T extends HTMLElement>(id: string, type: { new(): T }) {
+  const node = document.getElementById(id);
+  if (node !== null && !(node instanceof type)) throw new Error(`Noise Orb has an invalid #${id}.`);
+  return node;
+}
 export const ui = {
   root: element('instrument', HTMLElement), mesh: element('mesh', HTMLDivElement),
   sound: element('sound', HTMLButtonElement), label: element('sound-label', HTMLSpanElement),
   hint: element('sound-hint', HTMLSpanElement), status: element('status', HTMLParagraphElement),
-  exit: element('exit', HTMLButtonElement), overlay: element('exit-overlay', HTMLDivElement),
+  exit: optionalElement('exit', HTMLButtonElement), overlay: element('exit-overlay', HTMLDivElement),
   back: element('return', HTMLButtonElement),
 };
 export function report(error: unknown) {

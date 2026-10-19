@@ -30,7 +30,7 @@ export class Session {
     this.observer.observe(visibilityTarget ?? ui.mesh);
     document.addEventListener('visibilitychange', () => this.updateActivity());
     ui.sound.addEventListener('click', () => { void this.toggleSound().catch(report); });
-    ui.exit.addEventListener('click', () => { void this.exit().catch(report); });
+    ui.exit?.addEventListener('click', () => { void this.exit().catch(report); });
     ui.back.addEventListener('click', () => this.back());
     window.addEventListener('pagehide', () => { this.stopFrame(); void this.sound.close().catch(report); });
     window.addEventListener('pageshow', (event) => { if (event.persisted) this.updateActivity(); });
