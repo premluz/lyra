@@ -15,6 +15,7 @@ export class WaveRipples {
   private rims: SVGPathElement[] = [];
   private lights: SVGUseElement[] = [];
   private reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  private enabled = true;
   private elapsed = 0;
   private last = performance.now();
 
@@ -34,7 +35,14 @@ export class WaveRipples {
     });
   }
 
+  setEnabled(enabled: boolean) {
+    if (this.enabled === enabled) return;
+    this.enabled = enabled; this.last = performance.now();
+    this.element.setAttribute('display', enabled ? 'inline' : 'none');
+  }
+
   paint(role: string, visible: boolean, energy: number, reach: number) {
+    if (!this.enabled) return;
     const now = performance.now();
     this.elapsed += Math.min((now - this.last) / RIPPLE.milliseconds, RIPPLE.frameCap); this.last = now;
     this.element.setAttribute('class', `wave-ripples lane-${role}`);

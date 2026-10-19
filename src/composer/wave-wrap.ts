@@ -10,6 +10,7 @@ import type { WrappedPulse } from './wave-wrap-geometry';
 import { WaveRipples } from './wave-ripples';
 
 const CLOCK = { milliseconds: 1000 } as const;
+const OUTWARD_WAVES = { key: 'noise-orb:outward-waves', label: 'Outward waves & petals' } as const;
 
 export class WaveWrap {
   private host = document.createElement('div');
@@ -22,6 +23,7 @@ export class WaveWrap {
   private time = 0;
   private painted = -Infinity;
   private enabled = localStorage.getItem(WAVE_WRAP.key) === 'true';
+  private outwardEnabled = localStorage.getItem(OUTWARD_WAVES.key) !== 'false';
 
   constructor(private score: Score, audition: (step: number) => void) {
     this.host.className = 'wave-wrap'; this.host.id = 'wrapped-waves'; this.host.append(this.drawing);
@@ -37,12 +39,25 @@ export class WaveWrap {
     label.append(input, 'Wrap waves around orb');
     const settings = document.querySelector('#dev-settings .dev-settings-panel');
     if (!settings) throw new Error('Wrapped waves need the Dev settings panel.');
-    settings.prepend(label);
+    settings.prepend(label, this.outwardSetting());
     input.addEventListener('change', () => {
       this.gesture.cancel(); this.enabled = input.checked; this.update();
       try { localStorage.setItem(WAVE_WRAP.key, String(this.enabled)); } catch (error) { report(error); }
     });
     this.update();
+  }
+
+  private outwardSetting() {
+    const label = document.createElement('label'), input = document.createElement('input');
+    label.className = 'ambient-switch wave-wrap-switch'; input.type = 'checkbox'; input.setAttribute('role', 'switch');
+    input.checked = this.outwardEnabled; label.append(input, OUTWARD_WAVES.label);
+    label.title = 'Show expanding waves, glows and petal lighting. Turn off to reduce graphics work.';
+    input.addEventListener('change', () => {
+      this.outwardEnabled = input.checked;
+      this.ripples.forEach(ripple => ripple.setEnabled(this.outwardEnabled));
+      try { localStorage.setItem(OUTWARD_WAVES.key, String(this.outwardEnabled)); } catch (error) { report(error); }
+    });
+    return label;
   }
 
   update() {
@@ -60,6 +75,7 @@ export class WaveWrap {
         const ripple = new WaveRipples(ribbon.edge, ribbon.lightingId); this.ripples.set(lane.id, ripple); this.drawing.prepend(ripple.element);
         this.ribbons.set(lane.id, ribbon); this.drawing.append(ribbon.element);
       }
+      this.ripples.get(lane.id)?.setEnabled(this.outwardEnabled);
     }
     this.render();
   }
