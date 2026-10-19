@@ -60,7 +60,7 @@ test('each wave gets its own note density and offset, which drive the playback s
 test('Remove wave removes its line and notes; Undo restores it without losing edits to another wave', async ({ page }) => {
   await page.goto('/shape.html'); await page.getByRole('button', { name: 'Select Air', exact: true }).click(); await slider(page, 'Air density', 4);
   const original = (await saved(page)).lanes.find((lane) => lane.id === 'air');
-  await page.getByRole('button', { name: 'Remove wave', exact: true }).click();
+  await page.getByRole('button', { name: 'Remove sound', exact: true }).click();
   await expect(page.locator('.wave-line')).toHaveCount(2); await expect(page.getByRole('button', { name: 'Select Air', exact: true })).toHaveCount(0);
   expect((await saved(page)).lanes.some((lane) => lane.id === 'air')).toBe(false);
   await page.locator('.step-hit').first().press('ArrowUp'); const edited = (await saved(page)).lanes.find((lane) => lane.id === 'undertow');
@@ -68,11 +68,11 @@ test('Remove wave removes its line and notes; Undo restores it without losing ed
   const after = await saved(page); expect(after.lanes.find((lane) => lane.id === 'air')).toEqual(original);
   expect(after.lanes.find((lane) => lane.id === 'undertow')).toEqual(edited); await expect(page.locator('.wave-line')).toHaveCount(3);
   await page.getByRole('button', { name: 'Select Melody', exact: true }).click();
-  await page.getByRole('button', { name: 'Remove wave', exact: true }).click();
+  await page.getByRole('button', { name: 'Remove sound', exact: true }).click();
   await page.getByRole('button', { name: 'Undo remove wave', exact: true }).click();
   expect(await page.locator('.lane-tab').evaluateAll((buttons) => buttons.map((button) => button.getAttribute('aria-label')))).toEqual(['Select Melody', 'Select Undertow', 'Select Air']);
-  await page.getByRole('button', { name: 'Remove wave', exact: true }).click(); await page.getByRole('button', { name: 'Remove wave', exact: true }).click();
-  await expect(page.getByRole('button', { name: 'Remove wave', exact: true })).toBeDisabled();
+  await page.getByRole('button', { name: 'Remove sound', exact: true }).click(); await page.getByRole('button', { name: 'Remove sound', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Remove sound', exact: true })).toBeDisabled();
   await expect(page.locator('.wave-line')).toHaveCount(1);
 });
 
@@ -83,7 +83,7 @@ test.describe('phone rhythm controls', () => {
     const density = page.getByRole('slider', { name: 'Air density', exact: true }); await density.tap();
     const count = Number(await density.inputValue()); expect(count).toBeGreaterThan(0);
     const before = await saved(page); expect(before.lanes.find((lane) => lane.id === 'air')?.notes.filter((note) => note !== null)).toHaveLength(count);
-    await page.getByRole('button', { name: 'Remove wave', exact: true }).tap(); await expect(page.locator('.wave-line')).toHaveCount(2);
+    await page.getByRole('button', { name: 'Remove sound', exact: true }).tap(); await expect(page.locator('.wave-line')).toHaveCount(2);
     await page.getByRole('button', { name: 'Undo remove wave', exact: true }).tap(); expect(await saved(page)).toEqual(before);
     expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBe(0);
   });

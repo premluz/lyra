@@ -29,7 +29,7 @@ export class LaneList {
       item.button.dataset.enabled = String(isAudible(lane, this.score.state.ambientTools));
     }
     this.add.disabled = lanes.length >= COMPOSE.maxLanes;
-    this.add.textContent = this.add.disabled ? `${COMPOSE.maxLanes} sounds` : '+ Add sound';
+    this.add.textContent = this.add.disabled ? `${COMPOSE.maxLanes} sounds` : 'Add sound';
     const hidden = this.score.state.ambientTools ? 0 : lanes.filter(isContinuous).length;
     this.add.title = `${lanes.length} / ${COMPOSE.maxLanes} sound waves${hidden ? `; ${hidden} are under Ambient tools` : ''}`;
   }

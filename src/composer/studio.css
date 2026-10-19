@@ -1,6 +1,11 @@
 .studio-mode {
   --studio-overlay-z: 20;
-  --studio-dock-height: 23svh; --studio-unit: 6px;
+  --studio-dock-height: 25svh; --studio-unit: 6px;
+  --studio-footer-height: 30px; --studio-pane-bottom: var(--studio-pane-inset);
+  --studio-pane-padding: 12px; --studio-pane-inset: 12px; --studio-pane-radius: 10px;
+  --studio-icon-size: 16px; --studio-pane-blur: 18px; --studio-pane-line-width: 1px; --studio-focus-width: 100px;
+  --studio-pane-background: color-mix(in srgb, var(--dock-bg) 82%, transparent);
+  --studio-pane-border: color-mix(in srgb, var(--ink) 12%, transparent);
   --studio-gap: 4px; --studio-lane-width: 120px; --studio-lane-height: 30px;
   --studio-wave-min: 36px; --studio-caption-height: 12px;
   --studio-toolbar-height: 32px; --studio-controls-height: 56px; --studio-field-height: 26px;
@@ -10,27 +15,33 @@
   --studio-continuous-width: 420px; --studio-continuous-field: 90px; --studio-select-width: 72%;
   height: 100svh; min-height: 0;
 }
-.studio-mode .experience { min-height: 0; }
+.studio-mode:has(> .footer) { --studio-pane-bottom: calc(var(--studio-footer-height) + var(--studio-pane-inset)); }
+.studio-mode > .footer { position: absolute; inset: auto 0 0; min-height: var(--studio-footer-height); height: var(--studio-footer-height); gap: calc(var(--studio-unit) * 2); }
+.studio-mode .footer .gestures { min-width: 0; flex-direction: row; gap: calc(var(--studio-unit) * 3); overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+.studio-mode .footer .original-link { font-size: var(--studio-text); }
+.studio-mode .footer .quiet-button { flex-shrink: 0; margin-left: auto; padding: var(--studio-gap) var(--studio-unit); font-size: var(--studio-label); }
+.studio-mode .experience { position: absolute; inset: 0; min-height: 0; z-index: 0; }
 .studio-mode .experience > .mesh { inset: 0; }
-.studio-mode .composer { height: var(--studio-dock-height); max-height: var(--studio-dock-height); min-height: 0; flex: 0 0 var(--studio-dock-height); padding: var(--studio-unit) 0; }
-.studio-mode .composer-body { display: flex; flex-direction: column; height: 100%; min-height: 0; gap: var(--studio-gap); overflow-x: hidden; overflow-y: auto; scrollbar-width: thin; }
-.studio-mode .wave-editor { display: grid; grid-template-rows: var(--studio-lane-height) minmax(var(--studio-wave-min), 1fr) var(--studio-caption-height); flex: 1; min-height: calc(var(--studio-lane-height) + var(--studio-wave-min) + var(--studio-caption-height)); }
+.studio-mode .studio-dock { position: absolute; inset: auto var(--gutter) var(--studio-pane-bottom); display: flex; flex-direction: column; gap: var(--studio-unit); z-index: var(--studio-overlay-z); pointer-events: none; }
+.studio-mode .composer { position: relative; inset: auto; margin: 0; pointer-events: auto; height: auto; max-height: var(--studio-dock-height); min-height: 0; padding: var(--studio-pane-padding); border: var(--studio-pane-line-width) solid var(--studio-pane-border); border-radius: var(--studio-pane-radius); background: var(--studio-pane-background); backdrop-filter: blur(var(--studio-pane-blur)); z-index: var(--studio-overlay-z); }
+.studio-mode .composer-body { display: flex; flex-direction: column; height: auto; max-height: calc(var(--studio-dock-height) - var(--studio-pane-padding) * 2 - var(--studio-pane-line-width) * 2); min-height: 0; gap: var(--studio-gap); overflow-x: hidden; overflow-y: auto; scrollbar-width: thin; }
+.studio-mode .wave-editor { display: grid; grid-template-rows: var(--studio-lane-height) minmax(var(--studio-wave-min), 1fr) var(--studio-caption-height); flex: 0 0 auto; min-height: calc(var(--studio-lane-height) + var(--studio-wave-min) + var(--studio-caption-height)); }
 .studio-mode .lane-bar { min-width: 0; }
 .studio-mode .lane-tabs { display: flex; flex-wrap: nowrap; gap: var(--studio-gap); overflow-x: auto; scrollbar-width: none; }
 .studio-mode .lane-tab { flex: 1 0 var(--studio-lane-width); min-height: var(--studio-lane-height); padding: var(--studio-gap) var(--studio-unit) var(--studio-gap) calc(var(--studio-unit) * 3); gap: calc(var(--studio-gap) / 2); font-size: var(--studio-label); }
 .studio-mode .lane-tab::before { top: calc(var(--studio-unit) * 1.5); }
 .studio-mode .wave-surface { height: 100%; min-height: 0; margin: 0; }
 .studio-mode .wave-caption { margin: 0; font-size: var(--studio-text-tiny); line-height: var(--studio-caption-height); }
-.studio-mode .sound-shaping { display: flex; flex-direction: column; flex: 0 0 auto; padding: var(--studio-gap) 0 0; border-left: 0; border-top: 1px solid var(--line); min-width: 0; gap: var(--studio-gap); }
+.studio-mode .sound-shaping { display: flex; flex-direction: column; flex: 0 0 auto; padding: var(--studio-gap) 0 0; border: 0; min-width: 0; gap: var(--studio-gap); }
 .studio-mode .shaping-header { display: flex; align-items: center; flex-shrink: 0; height: var(--studio-toolbar-height); gap: calc(var(--studio-unit) * 2); overflow-x: auto; scrollbar-width: thin; }
 .studio-mode .shaping-controls[hidden] { display: none; }
-.studio-mode .shaping-label { flex-shrink: 0; margin: 0; font-size: var(--studio-text-small); }
+.studio-mode .shaping-label { display: none; }
 .studio-mode .sound-control { flex-shrink: 0; }
 .studio-mode .sound-button { min-height: var(--studio-field-height); padding: var(--studio-gap) var(--studio-unit); gap: var(--studio-unit); font-size: var(--studio-label); }
 .studio-mode .composer-actions { display: flex; flex-wrap: nowrap; flex-shrink: 0; margin: 0; gap: var(--studio-unit); width: auto; }
 .studio-mode .lane-toggle { min-height: var(--studio-field-height); padding: var(--studio-gap) var(--studio-unit); font-size: var(--studio-text); }
 .studio-mode .randomise-button { min-height: var(--studio-field-height); padding: var(--studio-gap) var(--studio-unit); font-size: var(--studio-label); white-space: nowrap; }
-.studio-mode .shaping-controls { display: flex; align-items: center; flex-shrink: 0; min-width: 0; height: var(--studio-controls-height); gap: calc(var(--studio-unit) * 2); overflow-x: auto; scrollbar-width: thin; }
+.studio-mode .shaping-controls { display: flex; align-items: center; flex-shrink: 0; min-width: 0; min-height: var(--studio-controls-height); gap: calc(var(--studio-unit) * 2); overflow-x: auto; scrollbar-width: thin; }
 .studio-mode .composition-bar { flex: 1 0 var(--studio-group-width); min-width: 0; display: flex; flex-direction: column; align-items: start; gap: var(--studio-gap); padding: 0; margin: 0; border: 0; font-size: var(--studio-text-small); }
 .studio-mode .composition-bar label { width: 100%; flex-direction: column; align-items: flex-start; gap: var(--studio-gap); }
 .studio-mode .composition-bar select { width: 100%; min-width: 0; max-width: 100%; min-height: var(--studio-field-height); padding: var(--studio-gap) var(--studio-unit); font-size: var(--studio-text); }
@@ -50,7 +61,7 @@
 .studio-mode .continuous-controls input, .studio-mode .continuous-controls select { min-height: var(--studio-field-height); font-size: var(--studio-text); }
 .studio-mode .dev-settings { flex-shrink: 0; margin-left: auto; color: var(--muted); font: var(--studio-text)/1.7 var(--mono); }
 .studio-mode .dev-settings > summary { cursor: pointer; padding: var(--studio-gap) var(--studio-unit); white-space: nowrap; }
-.studio-mode .dev-settings-panel { position: fixed; right: var(--gutter); bottom: calc(var(--studio-dock-height) + var(--studio-unit) * 2); z-index: 10; width: min(var(--studio-popup-width), calc(100vw - var(--gutter) * 2)); max-height: var(--studio-popup-height); overflow-y: auto; overscroll-behavior: contain; padding: calc(var(--studio-unit) * 3); background: var(--dock-bg); border: 1px solid var(--line); border-radius: var(--studio-unit); }
+.studio-mode .dev-settings-panel { position: absolute; right: var(--studio-pane-padding); bottom: calc(100% + var(--studio-gap)); z-index: 10; width: min(var(--studio-popup-width), calc(100vw - var(--gutter) * 2)); max-height: var(--studio-popup-height); overflow-y: auto; overscroll-behavior: contain; padding: calc(var(--studio-unit) * 3); background: var(--dock-bg); border: 1px solid var(--line); border-radius: var(--studio-unit); }
 .studio-mode .dev-mode-links { display: grid; gap: var(--studio-unit); margin-bottom: calc(var(--studio-unit) * 3); padding-bottom: calc(var(--studio-unit) * 3); border-bottom: 1px solid var(--line); }
 .studio-mode .dev-mode-links a { color: var(--muted); text-decoration: none; font: var(--studio-text) var(--mono); }
 .studio-mode .dev-mode-links a:hover, .studio-mode .dev-mode-links a[aria-current='page'] { color: var(--accent); }
@@ -61,19 +72,15 @@
 .studio-mode .dev-settings .arrangement-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .studio-mode .dev-settings .arrangement-controls > label:first-child, .studio-mode .dev-settings #fade-out { grid-column: 1 / -1; }
 .studio-mode .dev-settings .loop-label { margin: calc(var(--studio-unit) * 2) 0 0; max-width: none; text-align: left; font-size: var(--studio-text-tiny); }
-.studio-mode .focus-settings-toggle { flex-shrink: 0; padding: var(--studio-unit) calc(var(--studio-unit) * 2); border: 1px solid var(--line); border-radius: var(--radius); background: color-mix(in srgb, var(--bg) 78%, transparent); color: var(--ink); font: var(--studio-text-small) var(--mono); backdrop-filter: blur(var(--studio-unit)); }
+.studio-mode .studio-bottom-actions { display: flex; justify-content: flex-end; align-items: center; gap: var(--studio-unit); pointer-events: none; }
+.studio-mode .studio-bottom-actions > * { pointer-events: auto; }
+.studio-mode .studio-bottom-actions .studio-icon-button { display: inline-flex; align-items: center; justify-content: center; width: var(--studio-toolbar-height); height: var(--studio-toolbar-height); min-height: var(--studio-toolbar-height); padding: var(--studio-gap); border: var(--studio-pane-line-width) solid var(--line); border-radius: var(--radius); background: var(--studio-pane-background); color: var(--ink); backdrop-filter: blur(var(--studio-pane-blur)); }
+.studio-mode .studio-icon-button svg { width: var(--studio-icon-size); height: var(--studio-icon-size); fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.studio-mode .studio-icon-button .sr-only { position: absolute; }
+.studio-mode .focus-settings-toggle { width: var(--studio-focus-width); height: var(--studio-toolbar-height); padding: var(--studio-unit) calc(var(--studio-unit) * 2); border: 1px solid var(--line); border-radius: var(--radius); background: color-mix(in srgb, var(--bg) 78%, transparent); color: var(--ink); font: var(--studio-text-small) var(--mono); backdrop-filter: blur(var(--studio-unit)); }
 .studio-mode .focus-settings-toggle:hover { border-color: var(--accent); color: var(--accent); }
-.studio-mode[data-focus-mode='true'] { display: block; }
-.studio-mode[data-focus-mode='true'] .experience { position: absolute; inset: 0; width: 100%; height: 100%; min-height: 0; }
-.studio-mode[data-focus-mode='true'] .experience > .mesh { inset: 0; }
-.studio-mode[data-focus-mode='true'] .composer { position: absolute; inset: auto 0 0; width: auto; height: auto; max-height: none; min-height: 0; flex: 0 0 auto; margin: 0; padding: 0 var(--gutter) var(--gutter); border: 0; background: transparent; pointer-events: none; }
-.studio-mode[data-focus-mode='true'] .composer-body { display: block; height: auto; overflow: visible; }
-.studio-mode[data-focus-mode='true'] .composer-body > :not(.sound-shaping) { display: none; }
-.studio-mode[data-focus-mode='true'] .sound-shaping { display: block; padding: 0; border: 0; }
-.studio-mode[data-focus-mode='true'] .shaping-header { height: auto; justify-content: flex-end; overflow: visible; }
-.studio-mode[data-focus-mode='true'] .shaping-header > :not(.focus-settings-toggle) { display: none; }
-.studio-mode[data-focus-mode='true'] .focus-settings-toggle { pointer-events: auto; }
-.studio-mode[data-focus-mode='true'] .touch-cue { display: none; }
+.studio-mode[data-focus-mode='true'] :is(.touch-cue, .wrapped-wave-help, .footer, .status) { display: none; }
+.studio-mode[data-focus-mode='true'] .wrapped-note-handle { opacity: 0; }
 @media (max-width: 640px) {
   .studio-mode { --studio-lane-width: 100px; }
 }

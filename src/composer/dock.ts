@@ -11,6 +11,7 @@ import { isContinuous, isAudible } from './lanes';
 import { SUSTAIN } from '../audio/sustain-config';
 import { RhythmControls } from './rhythm-controls';
 import { CompositionControls } from './composition-controls';
+import { StudioActions } from './studio-actions';
 
 export class WaveDock {
   private toggle = element('lane-toggle', HTMLButtonElement);
@@ -27,7 +28,7 @@ export class WaveDock {
   readonly surface: WaveSurface;
 
   constructor(private score: Score, private audition: (step: number, preview?: boolean) => void, randomise?: () => void) {
-    this.focusToggle();
+    new StudioActions();
     this.lanes = new LaneList(score); this.controls = new LaneControls(score, () => this.audition(this.selectedStep));
     this.rhythm = new RhythmControls(score, () => this.audition(this.selectedStep, false));
     this.composition = new CompositionControls(score, () => this.audition(this.selectedStep, false));
@@ -39,19 +40,6 @@ export class WaveDock {
     element('wave-surface', HTMLDivElement).append(this.surface.element);
     this.knobs = KNOBS.map((knob) => new Knob(knob.key, knob.label, knob.hint, (value) => score.setKnob(knob.key, value), () => audition(this.selectedStep)));
     element('knobs', HTMLDivElement).append(...this.knobs.map((knob) => knob.element)); this.update();
-  }
-  private focusToggle() {
-    const header = document.querySelector('.shaping-header'), root = element('instrument', HTMLElement);
-    if (!(header instanceof HTMLElement)) throw new Error('Focus mode needs the composer settings header.');
-    const button = document.createElement('button');
-    button.type = 'button'; button.className = 'focus-settings-toggle'; button.setAttribute('aria-controls', 'composer');
-    const update = () => {
-      const expanded = root.dataset.focusMode !== 'true';
-      button.textContent = expanded ? 'Hide settings' : 'Show settings';
-      button.setAttribute('aria-expanded', String(expanded));
-    };
-    button.addEventListener('click', () => { root.dataset.focusMode = String(root.dataset.focusMode !== 'true'); update(); });
-    header.insertBefore(button, header.firstChild); update();
   }
   update() {
     const lane = this.score.selected, label = lane.name;

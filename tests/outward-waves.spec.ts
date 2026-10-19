@@ -22,7 +22,7 @@ for (const width of [1440, 390]) {
     await expect.poll(() => petal.getAttribute('transform')).not.toBe(alive);
     expect(await page.evaluate(key => localStorage.getItem(key), COMPOSE.storageKey)).toBe(tune);
     await page.reload(); await openDevSettings(page); await expect(toggle).not.toBeChecked();
-    await page.getByRole('button', { name: '+ Add sound', exact: true }).click();
+    await page.getByRole('button', { name: 'Add sound', exact: true }).click();
     expect((await rippleFrames(page)).instances).toEqual([]);
     await toggle.check();
     expect((await rippleFrames(page)).instances).toContain(3);
