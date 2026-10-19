@@ -5,7 +5,7 @@ import { saved, enableAmbient } from './composer-helpers';
 
 test('authors more than three independent lanes, assigns roles and sounds, and saves all of them', async ({ page }) => {
   await page.goto('/shape.html'); const original = await saved(page);
-  for (let i = 0; i < 4; i++) await page.getByRole('button', { name: 'Add sound', exact: true }).click();
+  for (let i = 0; i < 4; i++) await page.getByRole('button', { name: 'Add sound track', exact: true }).click();
   await expect(page.locator('.lane-tab')).toHaveCount(7); await expect(page.locator('.wave-line')).toHaveCount(7);
   await enableAmbient(page);
   await page.getByRole('combobox', { name: 'Sound 7 role', exact: true }).selectOption('drone');
@@ -18,9 +18,9 @@ test('authors more than three independent lanes, assigns roles and sounds, and s
   expect(beforeReload.lanes.at(-1)).toMatchObject({ name: 'Sound 7', role: 'drone', instrument: 'choir', attack: 4, breath: 60, pitch: 10 });
   await page.reload(); await enableAmbient(page); expect(await saved(page)).toEqual(beforeReload);
   await expect(page.getByRole('combobox', { name: 'Sound 7 role', exact: true })).toHaveValue('drone');
-  await page.getByRole('button', { name: 'Add sound', exact: true }).click();
+  await page.getByRole('button', { name: 'Add sound track', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Add 528 drone layers', exact: true })).toBeDisabled();
-  for (let i = 0; i < 4; i++) await page.getByRole('button', { name: 'Add sound', exact: true }).click();
+  for (let i = 0; i < 4; i++) await page.getByRole('button', { name: 'Add sound track', exact: true }).click();
   await expect(page.getByRole('button', { name: '12 sounds', exact: true })).toBeDisabled(); await expect(page.locator('.wave-line')).toHaveCount(12);
 });
 

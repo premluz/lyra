@@ -12,7 +12,7 @@ export class LaneList {
   constructor(private score: Score) {
     this.add.addEventListener('click', () => score.addLane());
     this.binaural.type = 'button'; this.binaural.id = 'add-binaural'; this.binaural.className = 'randomise-button';
-    this.binaural.textContent = 'Add binaural'; this.binaural.title = 'Add a continuous stereo sine layer';
+    this.binaural.textContent = 'Add binaural track'; this.binaural.title = 'Add a continuous stereo sine layer';
     this.binaural.addEventListener('click', () => {
       if (!score.state.ambientTools) score.setAmbientTools(true);
       score.addLane('binaural');
@@ -39,7 +39,7 @@ export class LaneList {
       item.button.dataset.enabled = String(isAudible(lane, this.score.state.ambientTools));
     }
     this.add.disabled = lanes.length >= COMPOSE.maxLanes; this.binaural.disabled = this.add.disabled;
-    this.add.textContent = this.add.disabled ? `${COMPOSE.maxLanes} sounds` : 'Add sound';
+    this.add.textContent = this.add.disabled ? `${COMPOSE.maxLanes} sounds` : 'Add sound track';
     const hidden = this.score.state.ambientTools ? 0 : lanes.filter(isContinuous).length;
     this.add.title = `${lanes.length} / ${COMPOSE.maxLanes} sound waves${hidden ? `; ${hidden} are under Ambient tools` : ''}`;
   }

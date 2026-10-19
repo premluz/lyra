@@ -44,7 +44,7 @@ export class StudioActions {
     if (!(actions instanceof HTMLElement)) throw new Error('Studio actions need the composition toolbar.');
     const randomise = element('randomise', HTMLButtonElement), add = element('add-lane', HTMLButtonElement);
     const remove = element('remove-wave', HTMLButtonElement);
-    remove.textContent = 'Remove sound';
+    remove.textContent = 'Remove track';
     add.classList.replace('lane-toggle', 'randomise-button'); remove.classList.replace('lane-toggle', 'randomise-button');
     actions.prepend(randomise, add, remove);
   }

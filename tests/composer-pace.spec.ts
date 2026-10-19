@@ -13,7 +13,7 @@ test('lane rate changes only the selected sound, persists and is included in Ran
   await page.getByRole('button', { name: 'Randomise', exact: true }).click();
   expect(new Set((await saved(page)).lanes.map((lane) => lane.rate)).size).toBe(3);
   await page.getByRole('button', { name: 'Undo randomise', exact: true }).click(); expect(await saved(page)).toEqual(changed);
-  await page.getByRole('button', { name: 'Remove sound', exact: true }).click();
+  await page.getByRole('button', { name: 'Remove track', exact: true }).click();
   await page.getByRole('button', { name: 'Undo remove wave', exact: true }).click(); expect(await saved(page)).toEqual(changed);
   await expect(page.locator('#status')).toBeEmpty();
 });
