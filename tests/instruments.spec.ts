@@ -1,5 +1,18 @@
 import { expect, test } from '@playwright/test';
 
+test('the gong family exposes the orb tone and three sound-bath sizes', async ({ page }) => {
+  await page.goto('/shape.html');
+  const gongs = await page.evaluate(async () => {
+    const path = '/src/audio/instruments.ts';
+    const { GONG_INSTRUMENTS }: typeof import('../src/audio/instruments') = await import(path);
+    return GONG_INSTRUMENTS.map(({ id, label, duration, partials }) => ({ id, label, duration, ratios: partials.map(({ ratio }) => ratio) }));
+  });
+  expect(gongs.map(({ id }) => id)).toEqual(['orb-gong', 'small-gong', 'bath-gong', 'deep-gong']);
+  expect(new Set(gongs.map(({ label }) => label)).size).toBe(gongs.length);
+  expect(gongs.map(({ duration }) => duration)).toEqual([2.7, 1.8, 3.8, 5]);
+  expect(new Set(gongs.map(({ ratios }) => ratios.join('/'))).size).toBe(gongs.length);
+});
+
 function expectDistinct(voices: readonly { id: string; energy: number; peak: number; signature: readonly number[] }[]) {
   for (const voice of voices) {
     expect(voice.energy, `${voice.id} audible`).toBeGreaterThan(0.01); expect(voice.peak).toBeLessThan(0.2);

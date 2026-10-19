@@ -54,7 +54,7 @@ export class WaveSurface {
       trace.path.dataset.selected = String(selected); trace.path.dataset.enabled = String(isAudible(lane, this.score.state.ambientTools));
       trace.dots.forEach((dot, step) => {
         dot.dataset.lane = lane.id;
-        dot.setAttribute('class', `note-dot lane-${lane.role}`); dot.setAttribute('visibility', isContinuous(lane) || step >= lane.notes.length ? 'hidden' : 'visible');
+        dot.setAttribute('class', `note-dot lane-${lane.role}`); dot.setAttribute('visibility', !lane.enabled || isContinuous(lane) || step >= lane.notes.length ? 'hidden' : 'visible');
         const pitch = lane.notes[step] ?? null; dot.setAttribute('cx', String(noteX(step, lane.notes.length)));
         dot.setAttribute('cy', String(pitch === null ? waveY(lane, step) : noteY(lane, pitch)));
         dot.dataset.filled = String(pitch !== null); dot.dataset.selected = String(selected); dot.dataset.enabled = String(lane.enabled);
@@ -73,7 +73,7 @@ export class WaveSurface {
     this.noteGrips.forEach((grip, step) => {
       const pitch = this.score.selected.notes[step] ?? null;
       grip.setAttribute('cx', String(noteX(step, this.score.selected.notes.length))); grip.setAttribute('cy', String(pitch === null ? 0 : noteY(this.score.selected, pitch)));
-      grip.setAttribute('visibility', pitch === null || isContinuous(this.score.selected) ? 'hidden' : 'visible');
+      grip.setAttribute('visibility', !this.score.selected.enabled || pitch === null || isContinuous(this.score.selected) ? 'hidden' : 'visible');
     });
     this.handles.refresh();
   }

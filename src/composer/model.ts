@@ -104,7 +104,7 @@ export class Score {
     return lane;
   }
   select(id: LaneId) { this.lane(id); this.state.selected = id; this.changed?.(); }
-  toggleLane() { this.selected.enabled = !this.selected.enabled; this.changed?.(); }
+  toggleLane(id: LaneId = this.state.selected) { const lane = this.lane(id); lane.enabled = !lane.enabled; this.changed?.(); }
   setInstrument(instrument: InstrumentId) {
     if (this.selected.role === 'binaural' && instrument !== 'sine') throw new Error('Binaural layers require pure sine tones.');
     this.selected.instrument = instrument; this.changed?.();

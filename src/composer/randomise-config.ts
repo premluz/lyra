@@ -1,12 +1,13 @@
 import type { LaneRole } from './config';
 import { MUSIC } from '../config';
-import { BASS_INSTRUMENTS } from '../audio/instruments';
+import { BASS_INSTRUMENTS, GONG_INSTRUMENTS } from '../audio/instruments';
 
 export type Range = readonly [number, number];
 export interface VoiceProfile { count: Range; pitch: Range; level: Range; tone: Range; length: Range; lift: Range }
 export const RANDOMISE = {
   resolution: 100,
-  melodicInstruments: ['pluck', 'felt', 'marimba', 'glass'], wavyInstruments: ['reed', 'strings'], wavyChance: 15,
+  melodicInstruments: ['pluck', 'felt', 'marimba', 'glass'],
+  wavyInstruments: ['reed', 'strings', ...GONG_INSTRUMENTS.map(({ id }) => id)], wavyChance: 15,
   bassInstruments: BASS_INSTRUMENTS.map(({ id }) => id),
   wavyLength: [0.3, 0.45], wavyLevel: [0.16, 0.25], wavyCount: [2, 4],
   hooks: [MUSIC.arpeggio, [0, 4, 7, 9, 7, 4], [0, 2, 4, 7, 4, 2], [0, 4, 7, 4, 9, 7], [0, 4, 2, 7, 4, 2], [0, 2, 7, 9, 4, 2]],

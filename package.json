@@ -13,6 +13,7 @@
     "verify": "npm run lint && npm test && npm run build && npm run test:e2e"
   },
   "dependencies": {
+    "@audio/encode-mp3": "1.2.2",
     "@magenta/music": "1.23.1",
     "@tensorflow/tfjs": "2.8.6",
     "@tonaljs/rhythm-pattern": "1.0.0",

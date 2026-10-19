@@ -10,6 +10,11 @@ import { pitchFor } from '../src/composer/model';
 import { NotePolicy, TICK } from '../src/score';
 import { supportingNotes } from '../src/composer/accompaniment';
 import { hookNotes } from '../src/composer/hook';
+import { GONG_INSTRUMENTS } from '../src/audio/instruments';
+
+test('generated gongs stay in the sparse accent palette', () => {
+  for (const { id } of GONG_INSTRUMENTS) expect(RANDOMISE.wavyInstruments).toContain(id);
+});
 
 for (const variant of ['trio', 'custom-polyphony'] as const) {
   test(`generated ${variant} tunes keep a plucked lead and at most one quiet wavy accent`, () => {

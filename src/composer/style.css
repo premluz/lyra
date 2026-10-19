@@ -3,7 +3,7 @@
 .shape-mode {
   --air: #b8b2da; --melody: var(--accent); --undertow: var(--warm);
   --dock-bg: #141a16; --dial: #28332b; --dial-edge: #48584a;
-  --visual-control-gap: 6px;
+  --visual-control-gap: 6px; --lane-audio-size: 28px; --lane-audio-gap: 6px;
 }
 .shape-mode .masthead { height: 84px; flex-shrink: 0; }
 .shape-mode .experience { min-height: 380px; }
@@ -34,7 +34,7 @@
 .ambient-switch { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font: 10px var(--mono); cursor: pointer; white-space: nowrap; }
 .ambient-switch input { accent-color: var(--accent); cursor: pointer; }
 .ambient-panel { margin-top: 16px; }
-.ambient-panel[hidden], .rhythm-controls[hidden], .lane-tab[hidden] { display: none; }
+.ambient-panel[hidden], .rhythm-controls[hidden], .lane-item[hidden] { display: none; }
 .rhythm-controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 4px 0 18px; }
 .rhythm-controls label { display: flex; flex-direction: column; gap: 7px; min-width: 0; color: var(--muted); font: 9px var(--mono); }
 .rhythm-controls output { color: var(--ink); font-size: 8px; }
@@ -48,7 +48,8 @@
 .wave-editor { min-width: 0; }
 .lane-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .lane-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; flex: 1; min-width: 0; }
-.lane-tab { background: none; border: 1px solid transparent; border-radius: var(--radius); color: var(--muted); padding: 8px 10px 8px 20px; font-size: 11px; min-height: 44px; display: flex; flex-direction: column; align-items: start; text-align: left; gap: 5px; min-width: 0; position: relative; }
+.lane-item { position: relative; min-width: 0; }
+.lane-tab { width: 100%; background: none; border: 1px solid transparent; border-radius: var(--radius); color: var(--muted); padding: 8px calc(var(--lane-audio-size) + var(--lane-audio-gap)) 8px 20px; font-size: 11px; min-height: 44px; display: flex; flex-direction: column; align-items: start; text-align: left; gap: 5px; min-width: 0; position: relative; }
 .lane-tab::before { content: ''; position: absolute; left: 8px; top: 12px; width: 4px; height: 4px; border-radius: 50%; background: currentColor; }
 .lane-tab > span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .lane-detail { font: 7px var(--mono); opacity: .55; }
@@ -60,6 +61,11 @@
 .lane-binaural { color: var(--air); }
 .lane-tab[data-enabled='false'] { opacity: .5; }
 .lane-tab[data-empty='true']::before { background: none; border: 1px solid currentColor; }
+.lane-audio-toggle { position: absolute; right: var(--lane-audio-gap); top: 50%; width: var(--lane-audio-size); height: var(--lane-audio-size); padding: var(--lane-audio-gap); transform: translateY(-50%); border: 0; border-radius: 50%; background: transparent; color: var(--muted); opacity: .7; }
+.lane-audio-toggle:hover, .lane-audio-toggle:focus-visible { background: var(--button); color: var(--ink); opacity: 1; }
+.lane-audio-toggle:focus-visible { outline: 1px solid var(--accent); }
+.lane-audio-toggle[data-muted='true'] { opacity: .42; }
+.lane-audio-toggle svg { display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .lane-toggle { border: 0; background: none; color: var(--muted); font-size: 10px; padding: 8px 0 8px 8px; min-height: 34px; white-space: nowrap; }
 .wave-surface { height: 115px; width: 100%; margin: 3px 0 0; }
 .wave-surface > svg { display: block; height: 100%; width: 100%; overflow: visible; touch-action: none; user-select: none; }
@@ -137,7 +143,7 @@ button:disabled, select:disabled { cursor: default; opacity: .45; }
   .loop-label span { margin: 0 2px; }
   .composer-body { grid-template-columns: minmax(0, 1fr); gap: 18px; }
   .lane-tabs { gap: 0; }
-  .lane-tab { padding: 6px 8px 6px 18px; font-size: 10px; min-height: 36px; gap: 6px; }
+  .lane-tab { padding: 6px calc(var(--lane-audio-size) + var(--lane-audio-gap)) 6px 18px; font-size: 10px; min-height: 36px; gap: 6px; }
   .lane-toggle { font-size: 9px; min-height: 36px; }
   .wave-surface { height: 100px; }
   .wave-caption { font-size: 7px; }

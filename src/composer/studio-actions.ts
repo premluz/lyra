@@ -32,11 +32,32 @@ export class StudioActions {
   }
 
   private exportControl() {
-    const button = element('export-setup', HTMLButtonElement);
+    const wrapper = document.createElement('div'), button = element('export-setup', HTMLButtonElement);
     const icon = svg('svg', { viewBox: EXPORT_ICON.viewBox, 'aria-hidden': 'true' });
+    const menu = document.createElement('div'), source = document.createElement('button'), mp3 = document.createElement('button');
     icon.append(svg('path', { d: EXPORT_ICON.path }));
-    button.replaceChildren(icon); button.classList.add('studio-icon-button'); button.setAttribute('aria-label', 'Export setup');
-    return button;
+    button.replaceChildren(icon); button.classList.add('studio-icon-button'); button.setAttribute('aria-label', 'Export');
+    button.setAttribute('aria-haspopup', 'menu'); button.setAttribute('aria-controls', 'export-menu');
+    wrapper.className = 'studio-export'; menu.id = 'export-menu'; menu.className = 'studio-export-menu';
+    menu.setAttribute('role', 'menu'); menu.hidden = true;
+    source.type = 'button'; source.id = 'export-source'; source.textContent = 'Source file'; source.setAttribute('role', 'menuitem');
+    mp3.type = 'button'; mp3.id = 'export-mp3'; mp3.textContent = 'MP3'; mp3.setAttribute('role', 'menuitem');
+    menu.append(source, mp3); wrapper.append(button, menu);
+    button.setAttribute('aria-expanded', 'false');
+    button.addEventListener('click', () => { menu.hidden = !menu.hidden; button.setAttribute('aria-expanded', String(!menu.hidden)); });
+    menu.addEventListener('click', (event) => {
+      if (!(event.target instanceof HTMLButtonElement)) return;
+      menu.hidden = true; button.setAttribute('aria-expanded', 'false');
+    });
+    document.addEventListener('pointerdown', (event) => {
+      if (!(event.target instanceof Node) || wrapper.contains(event.target)) return;
+      menu.hidden = true; button.setAttribute('aria-expanded', 'false');
+    });
+    button.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      menu.hidden = true; button.setAttribute('aria-expanded', 'false');
+    });
+    return wrapper;
   }
 
   private compositionActions() {

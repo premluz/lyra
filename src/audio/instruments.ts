@@ -1,6 +1,6 @@
 import { MUSIC } from '../config';
 
-export type InstrumentId = 'pluck' | 'felt' | 'marimba' | 'glass' | 'reed' | 'strings' | 'round-bass' | 'rubber-bass' | 'picked-bass' | 'muted-bass' | 'cloud' | 'choir' | 'tide' | 'sine';
+export type InstrumentId = 'pluck' | 'felt' | 'marimba' | 'glass' | 'reed' | 'strings' | 'orb-gong' | 'small-gong' | 'bath-gong' | 'deep-gong' | 'round-bass' | 'rubber-bass' | 'picked-bass' | 'muted-bass' | 'cloud' | 'choir' | 'tide' | 'sine';
 export interface Partial {
   type: OscillatorType;
   ratio: number;
@@ -40,6 +40,35 @@ export const BASS_INSTRUMENTS: readonly Instrument[] = [
     { type: 'sine', ratio: 2, gain: 0.3, fade: 0.07 },
   ] },
 ];
+// Inharmonic partials create a struck metal bloom; lower ratios make each larger gong feel physically heavier.
+export const GONG_INSTRUMENTS: readonly Instrument[] = [
+  { id: 'orb-gong', label: 'Orb gong', attack: 0.018, gain: 0.72, duration: 2.7, partials: [
+    { type: 'sine', ratio: 0.5, gain: 0.72, fade: null },
+    { type: 'triangle', ratio: 0.749, gain: 0.48, fade: 0.82 },
+    { type: 'sine', ratio: 1.51, gain: 0.24, fade: 0.48 },
+    { type: 'sine', ratio: 2.48, gain: 0.1, fade: 0.2 },
+  ] },
+  { id: 'small-gong', label: 'Small gong', attack: 0.006, gain: 0.7, duration: 1.8, partials: [
+    { type: 'sine', ratio: 1, gain: 0.68, fade: null },
+    { type: 'sine', ratio: 2.71, gain: 0.46, fade: 0.62 },
+    { type: 'sine', ratio: 4.18, gain: 0.25, fade: 0.35 },
+    { type: 'sine', ratio: 6.43, gain: 0.1, fade: 0.16 },
+  ] },
+  { id: 'bath-gong', label: 'Sound bath gong', attack: 0.032, gain: 0.62, duration: 3.8, partials: [
+    { type: 'sine', ratio: 0.5, gain: 0.72, fade: null },
+    { type: 'triangle', ratio: 1, gain: 0.34, fade: 0.88 },
+    { type: 'sine', ratio: 1.618, gain: 0.32, fade: 0.68 },
+    { type: 'sine', ratio: 2.756, gain: 0.19, fade: 0.42 },
+    { type: 'sine', ratio: 4.49, gain: 0.08, fade: 0.2 },
+  ] },
+  { id: 'deep-gong', label: 'Deep ceremonial gong', attack: 0.065, gain: 0.68, duration: 5, partials: [
+    { type: 'sine', ratio: 0.25, gain: 0.68, fade: null },
+    { type: 'triangle', ratio: 0.5, gain: 0.48, fade: 0.92 },
+    { type: 'sine', ratio: 0.771, gain: 0.36, fade: 0.74 },
+    { type: 'sine', ratio: 1.191, gain: 0.2, fade: 0.5 },
+    { type: 'sine', ratio: 2.02, gain: 0.09, fade: 0.24 },
+  ] },
+];
 // Partial ratios and independent decay give each voice its own acoustic character.
 export const INSTRUMENTS: readonly Instrument[] = [
   { id: 'pluck', label: 'Soft pluck', attack: MUSIC.attack, gain: 1, duration: 1, partials: [
@@ -71,6 +100,7 @@ export const INSTRUMENTS: readonly Instrument[] = [
     { type: 'sawtooth', ratio: 1, gain: 0.7, fade: null },
     { type: 'triangle', ratio: 2, gain: 0.25, fade: null },
   ] },
+  ...GONG_INSTRUMENTS,
   ...BASS_INSTRUMENTS,
 ];
 export const PAD_INSTRUMENTS: readonly Instrument[] = [

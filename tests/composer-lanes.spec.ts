@@ -1,7 +1,26 @@
 import { expect, test } from '@playwright/test';
 import { Score } from '../src/composer/model';
 import { COMPOSE } from '../src/composer/config';
-import { saved, enableAmbient } from './composer-helpers';
+import { saved, enableAmbient, openDevSettings } from './composer-helpers';
+
+test('each layer can be muted directly without changing the selected layer', async ({ page }) => {
+  await page.goto('/advanced-v3.html');
+  expect(await page.locator('.wrapped-note-handle[data-lane="undertow"]').count()).toBeGreaterThan(0);
+  await page.getByRole('button', { name: 'Mute Undertow', exact: true }).click();
+  await expect(page.locator('#selected-lane')).toHaveText('MELODY');
+  await expect(page.getByRole('button', { name: 'Mute Melody', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Mute Air', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Unmute Undertow', exact: true })).toBeVisible();
+  await expect(page.locator('.wrapped-note-handle[data-lane="undertow"]')).toHaveCount(0);
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Unmute Undertow', exact: true })).toBeVisible();
+  await openDevSettings(page); await page.getByRole('switch', { name: 'Wrap waves around orb', exact: true }).uncheck();
+  await expect(page.locator('.note-dot[data-lane="undertow"][visibility="visible"]')).toHaveCount(0);
+  expect(await page.locator('.note-dot[data-lane="melody"][visibility="visible"]').count()).toBeGreaterThan(0);
+  await page.getByRole('button', { name: 'Unmute Undertow', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Mute Undertow', exact: true })).toBeVisible();
+  expect(await page.locator('.note-dot[data-lane="undertow"][visibility="visible"]').count()).toBeGreaterThan(0);
+});
 
 test('authors more than three independent lanes, assigns roles and sounds, and saves all of them', async ({ page }) => {
   await page.goto('/shape.html'); const original = await saved(page);

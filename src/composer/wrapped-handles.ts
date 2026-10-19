@@ -17,7 +17,7 @@ export class WrappedHandles {
   update(time: number, pulses: ReadonlyMap<string, readonly WrappedPulse[]>) {
     const active = new Set<string>();
     for (const lane of this.score.state.lanes) {
-      if (isContinuous(lane)) continue;
+      if (!lane.enabled || isContinuous(lane)) continue;
       lane.notes.forEach((pitch, step) => {
         if (pitch === null) return;
         const key = `${lane.id}:${step}`; active.add(key);

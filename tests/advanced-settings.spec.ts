@@ -29,7 +29,7 @@ for (const width of [1440, 390]) {
     expect(height - closed.y - closed.height).toBeLessThanOrEqual(12);
     await expect(page.getByRole('button')).toHaveCount(3); await expect(page.getByRole('slider')).toHaveCount(0);
     await expect(page.getByRole('link')).toHaveCount(0); await expect(page.locator('.wrapped-wave-help')).toBeHidden();
-    const download = page.waitForEvent('download'); await page.getByRole('button', { name: 'Export setup', exact: true }).click();
+    const download = page.waitForEvent('download'); await page.getByRole('button', { name: 'Export', exact: true }).click(); await page.getByRole('menuitem', { name: 'Source file', exact: true }).click();
     expect((await download).suggestedFilename()).toMatch(/\.json$/);
     await page.getByRole('button', { name: 'Start sound', exact: true }).click();
     await page.getByRole('button', { name: 'Mute sound', exact: true }).click();

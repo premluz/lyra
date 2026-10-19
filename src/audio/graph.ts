@@ -66,10 +66,9 @@ export class AudioGraph {
       this.dry.gain.setTargetAtTime(1 - wet, this.context.currentTime, SUSTAIN.ease); this.wetMix = wet;
     }
   }
-  fadeOut(seconds: number) {
-    const now = this.context.currentTime;
-    this.envelope.gain.cancelAndHoldAtTime(now); this.envelope.gain.linearRampToValueAtTime(0, now + seconds);
-    return now + seconds;
+  fadeOut(seconds: number, start = this.context.currentTime) {
+    this.envelope.gain.cancelAndHoldAtTime(start); this.envelope.gain.linearRampToValueAtTime(0, start + seconds);
+    return start + seconds;
   }
 
   mute(muted: boolean) {
